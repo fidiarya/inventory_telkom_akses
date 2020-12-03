@@ -3,6 +3,7 @@ package HomePage;
 
 import GUI.AD_InputMaterial;
 import GUI.AD_Penerimaan;
+import GUI.AD_Pengeluaran;
 import GUI.X_About;
 import GUI.X_Help;
 import Sistem.Login;
@@ -46,7 +47,7 @@ public class HmAdmin extends javax.swing.JFrame {
         jpNotif.setVisible(false);
         try {
             st=conn.createStatement();
-            String sql = "SELECT * FROM tb_user";
+            String sql = "SELECT * FROM permintaan WHERE status='Approve'";
             rs = st.executeQuery(sql);
             if (rs.last()) {
                 int total= rs.getRow();
@@ -61,7 +62,7 @@ public class HmAdmin extends javax.swing.JFrame {
         }
     }
     
-    protected void dataTabel(){
+    public void dataTabel(){
         Object [] baris = {"id Material","Nama Material","id Vendor","Qty","Satuan"};
         tabmode = new DefaultTableModel(null, baris);
         tbStock.setModel(tabmode);
@@ -291,6 +292,9 @@ public class HmAdmin extends javax.swing.JFrame {
 
     private void btMKelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btMKelActionPerformed
         // TODO add your handling code here:
+        AD_Pengeluaran ak = new AD_Pengeluaran();
+        ak.Isi = (txUser.getText());
+        ak.setVisible(true);
     }//GEN-LAST:event_btMKelActionPerformed
 
     private void btTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTambahActionPerformed

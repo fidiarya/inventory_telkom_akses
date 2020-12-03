@@ -176,6 +176,7 @@ public class HmLeader extends javax.swing.JFrame {
         // TODO add your handling code here:
         LD_Permintaan per = new LD_Permintaan();
         per.setVisible(true);
+        per.txNmLeader.setText(txUser.getText());
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void btAboutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btAboutMouseClicked

@@ -51,12 +51,12 @@ public class X_About extends javax.swing.JFrame {
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 40, -1, -1));
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("PT. TELKOM AKSES Area Cibitung");
+        jLabel3.setText(" pada PT. TELKOM AKSES Area Cibitung");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 360, 20));
 
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("Sintem Informasi Pengolahan Data Material Pekerjaan Gangguan pada ");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 360, 20));
+        jLabel4.setText("Sintem Informasi Pengolahan Data Material Pekerjaan Gangguan");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 380, 20));
 
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("Aplication Version : 1.0");
@@ -66,7 +66,7 @@ public class X_About extends javax.swing.JFrame {
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 180, -1, -1));
 
         jLabel7.setText("Telp    : 0823-1152-9899");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 240, 130, -1));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 240, 160, -1));
 
         jLabel8.setText("Name  : Ilham Muharif");
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 200, 140, -1));

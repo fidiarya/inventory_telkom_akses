@@ -95,7 +95,7 @@ public class LD_Permintaan extends javax.swing.JFrame {
         txQty.setText("");
         cbSat.setSelectedIndex(0);
         txNmTeknisi.setText("");
-        txNmLeader.setText("");
+//        txNmLeader.setText("");
         dataTabel();
         autoNomor();
     }
@@ -642,7 +642,7 @@ public class LD_Permintaan extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable tbPermintaan;
     private javax.swing.JTextField txCari;
-    private javax.swing.JTextField txNmLeader;
+    public javax.swing.JTextField txNmLeader;
     private javax.swing.JTextField txNmMaterial;
     private javax.swing.JTextField txNmTeknisi;
     private javax.swing.JTextField txQty;
