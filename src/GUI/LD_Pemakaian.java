@@ -1,7 +1,6 @@
 
 package GUI;
 
-import HomePage.HmAdmin;
 import Sistem.makePreview;
 import java.io.File;
 import java.sql.Connection;
@@ -673,8 +672,6 @@ public class LD_Pemakaian extends javax.swing.JFrame {
         } else {
         makePreview("Pemakaian");
         }
-        System.out.println("A = "+tagA);
-        System.out.println("B = "+tagB);
     }//GEN-LAST:event_btCetakActionPerformed
 
     private void cbPengeluaranMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbPengeluaranMouseClicked

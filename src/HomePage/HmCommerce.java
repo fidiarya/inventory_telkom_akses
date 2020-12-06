@@ -1,6 +1,7 @@
 
 package HomePage;
 
+import GUI.CO_Rekon;
 import GUI.X_About;
 import GUI.X_Help;
 import Sistem.Login;
@@ -39,6 +40,7 @@ public class HmCommerce extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        btRekon = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1280, 720));
@@ -119,6 +121,23 @@ public class HmCommerce extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icon_telkom.png"))); // NOI18N
         jPanel4.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 600, -1, -1));
 
+        btRekon.setBackground(new java.awt.Color(255, 0, 0));
+        btRekon.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
+        btRekon.setForeground(new java.awt.Color(255, 255, 255));
+        btRekon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icon_input.png"))); // NOI18N
+        btRekon.setText("Rekon Material");
+        btRekon.setToolTipText("Input material masuk");
+        btRekon.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btRekon.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btRekon.setRequestFocusEnabled(false);
+        btRekon.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btRekon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btRekonActionPerformed(evt);
+            }
+        });
+        jPanel4.add(btRekon, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 190, 210, 150));
+
         getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 720));
 
         pack();
@@ -144,6 +163,12 @@ public class HmCommerce extends javax.swing.JFrame {
         ab.setVisible(true);
     }//GEN-LAST:event_btAboutMouseClicked
 
+    private void btRekonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRekonActionPerformed
+        // masuk
+        CO_Rekon cr = new CO_Rekon();
+        cr.setVisible(true);
+    }//GEN-LAST:event_btRekonActionPerformed
+
     public static void main(String args[]) {
         
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -157,6 +182,7 @@ public class HmCommerce extends javax.swing.JFrame {
     private javax.swing.JLabel btAbout;
     private javax.swing.JLabel btHelp;
     private javax.swing.JButton btLogout;
+    private javax.swing.JButton btRekon;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

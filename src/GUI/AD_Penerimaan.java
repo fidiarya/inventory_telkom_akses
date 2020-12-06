@@ -406,6 +406,9 @@ public class AD_Penerimaan extends javax.swing.JFrame {
         btCari = new javax.swing.JLabel();
         txCari = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
+        txTglA = new com.toedter.calendar.JDateChooser();
+        txTglB = new com.toedter.calendar.JDateChooser();
+        jLabel16 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -653,6 +656,17 @@ public class AD_Penerimaan extends javax.swing.JFrame {
         jSeparator1.setForeground(new java.awt.Color(51, 51, 51));
         jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, 140, -1));
 
+        txTglA.setToolTipText("dari tanggal");
+        txTglA.setDateFormatString("dd/MM/yyyy");
+        jPanel1.add(txTglA, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 100, 100, -1));
+
+        txTglB.setToolTipText("sampai tanggal");
+        txTglB.setDateFormatString("dd/MM/yyyy");
+        jPanel1.add(txTglB, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 100, 100, -1));
+
+        jLabel16.setText("s/d");
+        jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 100, -1, 20));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 910, 560));
 
         pack();
@@ -732,7 +746,13 @@ public class AD_Penerimaan extends javax.swing.JFrame {
 
     private void btCetakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCetakActionPerformed
         // cetak
+        String tagA = String.valueOf(txTglA.getDate());
+        String tagB = String.valueOf(txTglB.getDate());
+        if (tagA.equals("null") ||  tagB.equals("null")) {
+            JOptionPane.showMessageDialog(rootPane, "Pilih tanggal yang akan di cetak!");
+        } else {
         makePreview("Penerimaan");
+        }
     }//GEN-LAST:event_btCetakActionPerformed
 
     private void txidPenerimaanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txidPenerimaanActionPerformed
@@ -766,6 +786,7 @@ public class AD_Penerimaan extends javax.swing.JFrame {
     private javax.swing.JComboBox cbidVendor;
     private javax.swing.JLabel exit;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -784,10 +805,14 @@ public class AD_Penerimaan extends javax.swing.JFrame {
     private javax.swing.JTextField txNmVendor;
     private javax.swing.JTextField txQty;
     private com.toedter.calendar.JDateChooser txTgl;
+    private com.toedter.calendar.JDateChooser txTglA;
+    private com.toedter.calendar.JDateChooser txTglB;
     private javax.swing.JTextField txidPenerimaan;
     private javax.swing.JPanel window;
     // End of variables declaration//GEN-END:variables
 public void makePreview (String vName){
+        String tagA = String.valueOf(new SimpleDateFormat("dd MMMM yyyy").format(txTglA.getDate()));
+        String tagB = String.valueOf(new SimpleDateFormat("dd MMMM yyyy").format(txTglB.getDate()));
         try {
             String KopLaporan = getClass().getResource("/IMG/icon_telkom.png").toString();
             HmAdmin hm = new HmAdmin();
@@ -797,6 +822,8 @@ public void makePreview (String vName){
             HashMap parameter = new HashMap();
             parameter.put("Logo", KopLaporan);
             parameter.put("txUser", Isi);
+            parameter.put("tglA", tagA);
+            parameter.put("tglB", tagB);
             File report_file = new File (namaFile);
             JasperReport jasperReport = (JasperReport) JRLoader.loadObject(report_file.getPath());
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameter, conn);

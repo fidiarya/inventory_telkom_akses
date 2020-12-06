@@ -308,9 +308,7 @@ public class AD_Pengeluaran extends javax.swing.JFrame {
     private void exitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitMouseClicked
         // keluar
         dispose();
-        HmAdmin ha = new HmAdmin();
-        ha.notif();
-        ha.dataTabel();
+        HmAdmin ha = new HmAdmin(); 
     }//GEN-LAST:event_exitMouseClicked
     
     int x,y;

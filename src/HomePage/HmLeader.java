@@ -1,6 +1,7 @@
 
 package HomePage;
 
+import GUI.LD_Pemakaian;
 import GUI.LD_Permintaan;
 import GUI.X_About;
 import GUI.X_Help;
@@ -41,8 +42,8 @@ public class HmLeader extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        btPemakaian = new javax.swing.JButton();
+        btPermintaan = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1280, 720));
@@ -131,33 +132,38 @@ public class HmLeader extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icon_telkom.png"))); // NOI18N
         jPanel4.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 600, -1, -1));
 
-        jButton4.setBackground(new java.awt.Color(255, 0, 0));
-        jButton4.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(255, 255, 255));
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icon_output.png"))); // NOI18N
-        jButton4.setText("Pemakaian");
-        jButton4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton4.setRequestFocusEnabled(false);
-        jButton4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jPanel4.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 190, 210, 150));
-
-        jButton5.setBackground(new java.awt.Color(255, 0, 0));
-        jButton5.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
-        jButton5.setForeground(new java.awt.Color(255, 255, 255));
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icon_input.png"))); // NOI18N
-        jButton5.setText("Permintaan");
-        jButton5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton5.setFocusPainted(false);
-        jButton5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton5.setRequestFocusEnabled(false);
-        jButton5.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        btPemakaian.setBackground(new java.awt.Color(255, 0, 0));
+        btPemakaian.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
+        btPemakaian.setForeground(new java.awt.Color(255, 255, 255));
+        btPemakaian.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icon_output.png"))); // NOI18N
+        btPemakaian.setText("Pemakaian");
+        btPemakaian.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btPemakaian.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btPemakaian.setRequestFocusEnabled(false);
+        btPemakaian.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btPemakaian.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                btPemakaianActionPerformed(evt);
             }
         });
-        jPanel4.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 190, 210, 150));
+        jPanel4.add(btPemakaian, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 190, 210, 150));
+
+        btPermintaan.setBackground(new java.awt.Color(255, 0, 0));
+        btPermintaan.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
+        btPermintaan.setForeground(new java.awt.Color(255, 255, 255));
+        btPermintaan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icon_input.png"))); // NOI18N
+        btPermintaan.setText("Permintaan");
+        btPermintaan.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btPermintaan.setFocusPainted(false);
+        btPermintaan.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btPermintaan.setRequestFocusEnabled(false);
+        btPermintaan.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btPermintaan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btPermintaanActionPerformed(evt);
+            }
+        });
+        jPanel4.add(btPermintaan, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 190, 210, 150));
 
         getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 720));
 
@@ -172,12 +178,12 @@ public class HmLeader extends javax.swing.JFrame {
         lg.setVisible(true);
     }//GEN-LAST:event_btLogoutActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void btPermintaanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPermintaanActionPerformed
         // TODO add your handling code here:
         LD_Permintaan per = new LD_Permintaan();
         per.setVisible(true);
         per.txNmLeader.setText(txUser.getText());
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_btPermintaanActionPerformed
 
     private void btAboutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btAboutMouseClicked
         // TODO add your handling code here:
@@ -190,6 +196,12 @@ public class HmLeader extends javax.swing.JFrame {
         X_Help hp = new X_Help();
         hp.setVisible(true);
     }//GEN-LAST:event_btHelpMouseClicked
+
+    private void btPemakaianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPemakaianActionPerformed
+        // TODO add your handling code here:
+        LD_Pemakaian ldp = new LD_Pemakaian();
+        ldp.setVisible(true);
+    }//GEN-LAST:event_btPemakaianActionPerformed
 
     public static void main(String args[]) {
         
@@ -204,8 +216,8 @@ public class HmLeader extends javax.swing.JFrame {
     private javax.swing.JLabel btAbout;
     private javax.swing.JLabel btHelp;
     private javax.swing.JButton btLogout;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
+    private javax.swing.JButton btPemakaian;
+    private javax.swing.JButton btPermintaan;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

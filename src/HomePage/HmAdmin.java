@@ -2,6 +2,7 @@
 package HomePage;
 
 import GUI.AD_InputMaterial;
+import GUI.AD_InputVendor;
 import GUI.AD_Penerimaan;
 import GUI.AD_Pengeluaran;
 import GUI.X_About;
@@ -110,6 +111,8 @@ public class HmAdmin extends javax.swing.JFrame {
         btMKel = new javax.swing.JButton();
         btMMas = new javax.swing.JButton();
         btTambah = new javax.swing.JButton();
+        btTambahVendor = new javax.swing.JButton();
+        btRefresh = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("  Halaman Admin");
@@ -275,7 +278,35 @@ public class HmAdmin extends javax.swing.JFrame {
                 btTambahActionPerformed(evt);
             }
         });
-        jPanel4.add(btTambah, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 370, 30, 30));
+        jPanel4.add(btTambah, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 370, 30, 30));
+
+        btTambahVendor.setBackground(new java.awt.Color(255, 0, 0));
+        btTambahVendor.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btTambahVendor.setForeground(new java.awt.Color(255, 255, 255));
+        btTambahVendor.setText("+");
+        btTambahVendor.setToolTipText("Tambah data vendor");
+        btTambahVendor.setBorderPainted(false);
+        btTambahVendor.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btTambahVendor.setFocusable(false);
+        btTambahVendor.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btTambahVendor.setMargin(new java.awt.Insets(2, 2, 2, 2));
+        btTambahVendor.setRequestFocusEnabled(false);
+        btTambahVendor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btTambahVendorActionPerformed(evt);
+            }
+        });
+        jPanel4.add(btTambahVendor, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 370, 30, 30));
+
+        btRefresh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icon/refresh.png"))); // NOI18N
+        btRefresh.setToolTipText("Refresh");
+        btRefresh.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btRefresh.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btRefreshMouseClicked(evt);
+            }
+        });
+        jPanel4.add(btRefresh, new org.netbeans.lib.awtextra.AbsoluteConstraints(1230, 120, -1, -1));
 
         getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 720));
 
@@ -322,6 +353,18 @@ public class HmAdmin extends javax.swing.JFrame {
         ab.setVisible(true);
     }//GEN-LAST:event_btAboutMouseClicked
 
+    private void btTambahVendorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTambahVendorActionPerformed
+        // TODO add your handling code here:
+        AD_InputVendor aiv = new AD_InputVendor();
+        aiv.setVisible(true);
+    }//GEN-LAST:event_btTambahVendorActionPerformed
+
+    private void btRefreshMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btRefreshMouseClicked
+        // TODO add your handling code here:
+        dataTabel();
+        notif();
+    }//GEN-LAST:event_btRefreshMouseClicked
+
     public static void main(String args[]) {
         
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -337,7 +380,9 @@ public class HmAdmin extends javax.swing.JFrame {
     private javax.swing.JButton btLogout;
     private javax.swing.JButton btMKel;
     private javax.swing.JButton btMMas;
+    private javax.swing.JLabel btRefresh;
     private javax.swing.JButton btTambah;
+    private javax.swing.JButton btTambahVendor;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
