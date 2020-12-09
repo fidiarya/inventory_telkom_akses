@@ -291,13 +291,18 @@ public class AD_Pengeluaran extends javax.swing.JFrame {
         jSeparator1.setForeground(new java.awt.Color(51, 51, 51));
         jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, 140, -1));
 
+        btKonfirmasi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icon/checklist.png"))); // NOI18N
         btKonfirmasi.setText("Konfirmasi dan Cetak");
+        btKonfirmasi.setToolTipText("Konfirmasi dan cetak material keluar");
+        btKonfirmasi.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btKonfirmasi.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        btKonfirmasi.setIconTextGap(10);
         btKonfirmasi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btKonfirmasiActionPerformed(evt);
             }
         });
-        jPanel1.add(btKonfirmasi, new org.netbeans.lib.awtextra.AbsoluteConstraints(573, 443, 170, 30));
+        jPanel1.add(btKonfirmasi, new org.netbeans.lib.awtextra.AbsoluteConstraints(573, 443, 170, 40));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 810, 560));
 

@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -30,7 +31,7 @@ public class CO_Rekon extends javax.swing.JFrame {
     ResultSet rs;
     makePreview mp = new makePreview();
     public String Isi = null;
-    String idPakai,idMaterial,nmMaterial,QtyPakai,SatPakai,idKeluar,QtyKeluar,SatKeluar,Status;
+    String idPakai,idMaterial,nmMaterial,QtyPakai,SatPakai,idKeluar,QtyKeluar,SatKeluar,tglRekon,Status;
     String StatusY="Rekon", StatusN="Tidak Rekon";
 
     
@@ -39,6 +40,13 @@ public class CO_Rekon extends javax.swing.JFrame {
         dataTabel2();
         dataTabel();
         btRekon.setEnabled(false);
+        Tanggal();
+    }
+    
+    public void Tanggal() {
+      Date HariSekarang = new Date( );
+      SimpleDateFormat ft = new SimpleDateFormat ("dd MMMM yyyy");
+      tglRekon = ft.format(HariSekarang);
     }
     
      protected void dataTabel(){
@@ -70,7 +78,7 @@ public class CO_Rekon extends javax.swing.JFrame {
     }
      
      protected void dataTabel2(){
-        Object [] baris = {"ID Pakai","ID Material","Nama Material","Qty Pakai","Satuan","ID Keluar","Qty Keluar","Satuan","Status"};
+        Object [] baris = {"ID Pakai","ID Material","Nama Material","Qty Pakai","Satuan","ID Keluar","Qty Keluar","Satuan","Tanggal Rekon","Status"};
         tabmode = new DefaultTableModel(null, baris);
         tbRekon.setModel(tabmode);
         String sql="select*from rekon";
@@ -86,9 +94,10 @@ public class CO_Rekon extends javax.swing.JFrame {
             String g = hasil.getString("id_keluar");
             String h = hasil.getString("qty_keluar");
             String i = hasil.getString("sat_keluar");
-            String j = hasil.getString("status");
+            String j = hasil.getString("tgl_rekon");
+            String k = hasil.getString("status");
            
-            String[]data = {a,b,c,d,f,g,h,i,j};
+            String[]data = {a,b,c,d,f,g,h,i,j,k};
             tabmode.addRow(data);
             }
         }catch (Exception e) {
@@ -116,7 +125,7 @@ public class CO_Rekon extends javax.swing.JFrame {
         } else  {
             Status = StatusN;
         }
-        String sql = "insert into rekon values (?,?,?,?,?,?,?,?,?)";
+        String sql = "insert into rekon values (?,?,?,?,?,?,?,?,?,?)";
         int ok = JOptionPane.showConfirmDialog(rootPane, "Apakah anda yakin merekon material keluar "
                 + "dengan id material "+idMaterial+" dengan qty pakai = "+QtyPakai+" dan qty keluar = "+QtyKeluar+" "
                 + "dengan status "+Status+" ?","Konfirmasi", JOptionPane.YES_NO_OPTION);
@@ -131,7 +140,8 @@ public class CO_Rekon extends javax.swing.JFrame {
             stat.setString(6,idKeluar);
             stat.setString(7,QtyKeluar);
             stat.setString(8,SatKeluar);
-            stat.setString(9, Status);
+            stat.setString(9,tglRekon);
+            stat.setString(10,Status);
 
             stat.executeUpdate();
             stat.close();
@@ -183,9 +193,10 @@ public class CO_Rekon extends javax.swing.JFrame {
                     + "rekon where nm_material like '%"+txCari2.getText()+"%' or "
                     + "id_material like '%"+txCari2.getText()+"%' or "
                     + "id_pakai like '%"+txCari2.getText()+"%' or "
+                    + "tgl_rekon like '%"+txCari2.getText()+"%' or "
                     + "status like '%"+txCari2.getText()+"%' ");
             while(rs.next()){
-                String data[]={rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8),rs.getString(9)};
+                String data[]={rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8),rs.getString(9),rs.getString(10)};
                 tabmode.addRow(data);
             }
         }catch (SQLException ex){
@@ -352,7 +363,12 @@ public class CO_Rekon extends javax.swing.JFrame {
         jPanel1.add(btCari2, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 360, -1, -1));
 
         btRekon.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btRekon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icon/checklist.png"))); // NOI18N
         btRekon.setText("Rekon");
+        btRekon.setToolTipText("Rekon material keluar dan pemakaian");
+        btRekon.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btRekon.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        btRekon.setIconTextGap(10);
         btRekon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btRekonActionPerformed(evt);

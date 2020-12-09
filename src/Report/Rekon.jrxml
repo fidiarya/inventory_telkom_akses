@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="786" leftMargin="28" rightMargin="28" topMargin="28" bottomMargin="28" uuid="74c8ae63-15a1-4217-942f-28b12e593719">
+	<property name="ireport.zoom" value="1.1000000000000008"/>
+	<property name="ireport.x" value="19"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="txUser" class="java.lang.String"/>
+	<parameter name="tglA" class="java.lang.String"/>
+	<parameter name="tglB" class="java.lang.String"/>
+	<parameter name="Logo" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     rekon.`id_pakai` AS rekon_id_pakai,
+     rekon.`id_material` AS rekon_id_material,
+     rekon.`nm_material` AS rekon_nm_material,
+     rekon.`qty_pakai` AS rekon_qty_pakai,
+     rekon.`sat_pakai` AS rekon_sat_pakai,
+     rekon.`id_keluar` AS rekon_id_keluar,
+     rekon.`qty_keluar` AS rekon_qty_keluar,
+     rekon.`sat_keluar` AS rekon_sat_keluar,
+     rekon.`status` AS rekon_status,
+     rekon.`tgl_rekon` AS rekon_tgl_rekon
+FROM
+     `rekon` rekon 
+WHERE rekon.`tgl_rekon` BETWEEN  $P{tglA} AND $P{tglB}]]>
+	</queryString>
+	<field name="rekon_id_pakai" class="java.lang.String"/>
+	<field name="rekon_id_material" class="java.lang.String"/>
+	<field name="rekon_nm_material" class="java.lang.String"/>
+	<field name="rekon_qty_pakai" class="java.lang.String"/>
+	<field name="rekon_sat_pakai" class="java.lang.String"/>
+	<field name="rekon_id_keluar" class="java.lang.String"/>
+	<field name="rekon_qty_keluar" class="java.lang.String"/>
+	<field name="rekon_sat_keluar" class="java.lang.String"/>
+	<field name="rekon_status" class="java.lang.String"/>
+	<field name="rekon_tgl_rekon" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<image>
+				<reportElement uuid="fad99e60-fde9-4634-81fe-cb89c38c617f" x="25" y="18" width="147" height="39"/>
+				<imageExpression><![CDATA[$P{Logo}]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="221d5257-4847-4770-b95f-979f73119f9e" x="304" y="0" width="173" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DATA REKON MATERIAL]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="38" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="0be49eec-1645-4f13-b1df-06ed8ba80cda" x="26" y="18" width="72" height="20"/>
+				<box leftPadding="4" rightPadding="4">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="false"/>
+				</textElement>
+				<text><![CDATA[ID Pemakaian]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d382b4af-04d9-4b07-92ce-516533c5f536" x="98" y="18" width="100" height="20"/>
+				<box leftPadding="4" rightPadding="4">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[ID Material]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="aa5ab7b3-316d-479d-95a5-565d2b7adbfe" x="198" y="18" width="115" height="20"/>
+				<box leftPadding="4" rightPadding="4">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[Nama Material]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d6afbf01-b5f8-453d-b04f-df8b5242b366" x="313" y="18" width="36" height="20"/>
+				<box leftPadding="4" rightPadding="4">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[Qty]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d48d406d-f547-40ca-9bd4-c644b1711fc7" x="349" y="18" width="52" height="20"/>
+				<box leftPadding="4" rightPadding="4">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Satuan]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="6afdebc1-36c5-4ecd-ad2f-d54e22e9c93c" x="401" y="18" width="76" height="20"/>
+				<box leftPadding="4" rightPadding="4">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="false"/>
+				</textElement>
+				<text><![CDATA[ID Pengeluaran]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="5adafa96-15dc-45f5-a13e-a2fb33a1c011" x="477" y="18" width="38" height="20"/>
+				<box leftPadding="4" rightPadding="4">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[Qty]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="cf47406e-8324-45f7-abf4-6bf6aa271d68" x="515" y="18" width="49" height="20"/>
+				<box leftPadding="4" rightPadding="4">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Satuan]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c46ce426-5f6e-4afb-ae93-4c2ba2dd1a45" x="674" y="18" width="84" height="20"/>
+				<box leftPadding="4" rightPadding="4">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[Status]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e189f90d-256b-4704-ba40-dd027eca8213" x="564" y="18" width="110" height="20"/>
+				<box leftPadding="4" rightPadding="4">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Tanggal Rekon]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement uuid="d7ddb9ad-a507-48d4-a179-add2d5797c61" x="26" y="0" width="72" height="20"/>
+				<box leftPadding="4" rightPadding="4">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{rekon_id_pakai}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="cbbb589e-df7f-401c-97e3-33452a60aae0" x="98" y="0" width="100" height="20"/>
+				<box leftPadding="4" rightPadding="4">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{rekon_id_material}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="63d0470b-ea5e-4b8e-b63b-d0a3f0f3749b" x="198" y="0" width="115" height="20"/>
+				<box leftPadding="4" rightPadding="4">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{rekon_nm_material}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="5eeffdb8-fabc-4ae9-af8a-f3df0b11afb9" x="313" y="0" width="36" height="20"/>
+				<box leftPadding="4" rightPadding="4">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{rekon_qty_pakai}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="485de3f5-3288-4fe1-8d91-138b8da6ff00" x="349" y="0" width="52" height="20"/>
+				<box leftPadding="4" rightPadding="4">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{rekon_sat_pakai}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="1b46dcce-b6d9-45c9-a294-a70f11fc15db" x="401" y="0" width="76" height="20"/>
+				<box leftPadding="4" rightPadding="4">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{rekon_id_keluar}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="b6df76f4-6997-48a4-8c78-2b8bd587e0e6" x="477" y="0" width="38" height="20"/>
+				<box leftPadding="4" rightPadding="4">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{rekon_qty_keluar}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="451adaa0-205a-4d39-98a6-df194a628373" x="515" y="0" width="49" height="20"/>
+				<box leftPadding="4" rightPadding="4">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{rekon_sat_keluar}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="c09ff006-0c5b-4de7-a593-dfa85e0bb0d1" x="674" y="0" width="84" height="20"/>
+				<box leftPadding="4" rightPadding="4">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{rekon_status}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="b5234dbe-9652-4756-8580-de3cd7088d16" x="564" y="0" width="110" height="20"/>
+				<box leftPadding="4" rightPadding="4">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{rekon_tgl_rekon}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="38" splitType="Stretch">
+			<textField>
+				<reportElement uuid="64168c89-bb68-457b-91a0-9235464fe546" x="762" y="18" width="24" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="129" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="dbc46531-af1e-4ade-980b-5d035e243967" x="606" y="29" width="42" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Cibitung, ]]></text>
+			</staticText>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement uuid="3e75dfa4-4718-4531-9c6e-c57febb1f375" x="648" y="29" width="138" height="20"/>
+				<box leftPadding="2"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="562d780a-2173-4cd6-8e90-76b17985ae02" x="606" y="49" width="100" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Commerce]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="3faf0b7d-9d9b-4988-b465-3f13e774d2ac" x="606" y="109" width="100" height="20"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{txUser}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>
