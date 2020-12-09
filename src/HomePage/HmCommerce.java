@@ -167,6 +167,7 @@ public class HmCommerce extends javax.swing.JFrame {
         // masuk
         CO_Rekon cr = new CO_Rekon();
         cr.setVisible(true);
+        cr.Isi=txUser.getText();
     }//GEN-LAST:event_btRekonActionPerformed
 
     public static void main(String args[]) {

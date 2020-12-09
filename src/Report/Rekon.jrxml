@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="786" leftMargin="28" rightMargin="28" topMargin="28" bottomMargin="28" uuid="74c8ae63-15a1-4217-942f-28b12e593719">
 	<property name="ireport.zoom" value="1.1000000000000008"/>
 	<property name="ireport.x" value="19"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="70"/>
 	<parameter name="txUser" class="java.lang.String"/>
 	<parameter name="tglA" class="java.lang.String"/>
 	<parameter name="tglB" class="java.lang.String"/>
