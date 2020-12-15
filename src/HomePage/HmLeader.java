@@ -3,17 +3,28 @@ package HomePage;
 
 import GUI.LD_Pemakaian;
 import GUI.LD_Permintaan;
+import GUI.LD_PermintaanApprove;
 import GUI.X_About;
 import GUI.X_Help;
 import Sistem.Login;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import javax.swing.JLabel;
+import javax.swing.table.DefaultTableModel;
+import mainkoneksi.Koneksi;
 
 
 public class HmLeader extends javax.swing.JFrame {
+    private final Connection conn = new Koneksi().connect();
+    private DefaultTableModel tabmode;
+    Statement st;
+    ResultSet rs; 
 
     
     public HmLeader() {
         initComponents();
+        notif();
     }
     
     public JLabel getUser() {
@@ -22,6 +33,25 @@ public class HmLeader extends javax.swing.JFrame {
 
     public void setUser(JLabel txUser) {
         this.txUser = txUser;
+    }
+    
+    public void notif (){
+        jpNotif.setVisible(false);
+        try {
+            st=conn.createStatement();
+            String sql = "SELECT * FROM permintaan WHERE status='Approve'";
+            rs = st.executeQuery(sql);
+            if (rs.last()) {
+                int total= rs.getRow();
+                rs.beforeFirst();
+                
+                txJum.setText(Integer.toString(total));
+                if (total>0) {
+                jpNotif.setVisible(true);
+                }
+            }
+        } catch (Exception e) {
+        }
     }
 
     
@@ -44,6 +74,9 @@ public class HmLeader extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         btPemakaian = new javax.swing.JButton();
         btPermintaan = new javax.swing.JButton();
+        btPermintaan1 = new javax.swing.JButton();
+        jpNotif = new javax.swing.JPanel();
+        txJum = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1280, 720));
@@ -163,7 +196,37 @@ public class HmLeader extends javax.swing.JFrame {
                 btPermintaanActionPerformed(evt);
             }
         });
-        jPanel4.add(btPermintaan, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 190, 210, 150));
+        jPanel4.add(btPermintaan, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 190, 210, 150));
+
+        btPermintaan1.setBackground(new java.awt.Color(255, 0, 0));
+        btPermintaan1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
+        btPermintaan1.setForeground(new java.awt.Color(255, 255, 255));
+        btPermintaan1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/list.png"))); // NOI18N
+        btPermintaan1.setText("Di Approve");
+        btPermintaan1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btPermintaan1.setFocusPainted(false);
+        btPermintaan1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btPermintaan1.setRequestFocusEnabled(false);
+        btPermintaan1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btPermintaan1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btPermintaan1ActionPerformed(evt);
+            }
+        });
+        jPanel4.add(btPermintaan1, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 190, 210, 150));
+
+        jpNotif.setBackground(new java.awt.Color(51, 204, 0));
+        jpNotif.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        txJum.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        txJum.setForeground(new java.awt.Color(255, 255, 255));
+        txJum.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txJum.setText("0");
+        txJum.setToolTipText("Permintaan material");
+        txJum.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jpNotif.add(txJum, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 40, 30));
+
+        jPanel4.add(jpNotif, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 160, 40, 30));
 
         getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 720));
 
@@ -203,6 +266,13 @@ public class HmLeader extends javax.swing.JFrame {
         ldp.setVisible(true);
     }//GEN-LAST:event_btPemakaianActionPerformed
 
+    private void btPermintaan1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPermintaan1ActionPerformed
+        // TODO add your handling code here:
+        LD_PermintaanApprove lpa = new LD_PermintaanApprove();
+        lpa.setVisible(true);
+        lpa.Isi = txUser.getText();
+    }//GEN-LAST:event_btPermintaan1ActionPerformed
+
     public static void main(String args[]) {
         
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -218,6 +288,7 @@ public class HmLeader extends javax.swing.JFrame {
     private javax.swing.JButton btLogout;
     private javax.swing.JButton btPemakaian;
     private javax.swing.JButton btPermintaan;
+    private javax.swing.JButton btPermintaan1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -227,6 +298,8 @@ public class HmLeader extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jpNotif;
+    private javax.swing.JLabel txJum;
     private javax.swing.JLabel txUser;
     // End of variables declaration//GEN-END:variables
 }
