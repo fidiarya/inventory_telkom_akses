@@ -2,7 +2,6 @@
 package GUI;
 
 import Sistem.makePreview;
-import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,17 +9,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import mainkoneksi.Koneksi;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.engine.util.JRLoader;
-import net.sf.jasperreports.view.JasperViewer;
 
 
 public class LD_TidakRekon extends javax.swing.JFrame {
@@ -28,9 +21,8 @@ public class LD_TidakRekon extends javax.swing.JFrame {
     private DefaultTableModel tabmode;
     Statement st ;
     ResultSet rs;
-    makePreview mp = new makePreview();
-    public String Isi = null;
-    String statusP = "pakai", nAwal, nAkhir;
+    String statusP = "pakai" ;
+    int nAwal=0, nAkhir=0, total=nAwal + nAkhir;
     
 
     
@@ -38,7 +30,6 @@ public class LD_TidakRekon extends javax.swing.JFrame {
         initComponents();
         dataTabel();
         isiComboId();
-        btEdit.setEnabled(false);
     }
     
      protected void dataTabel(){
@@ -93,10 +84,9 @@ public class LD_TidakRekon extends javax.swing.JFrame {
         txidPel.setText(tabmode.getValueAt(bar, 8).toString());
         txnmPel.setText(tabmode.getValueAt(bar, 9).toString());
         txAlamat.setText(tabmode.getValueAt(bar, 10).toString());
-        nAwal = (tabmode.getValueAt(bar, 11).toString());
+        nAwal = Integer.valueOf(tabmode.getValueAt(bar, 11).toString());
         cbSat.setSelectedItem(tabmode.getValueAt(bar, 12).toString());
         txTek.setText(tabmode.getValueAt(bar, 13).toString());
-        btEdit.setEnabled(true);
     }
     
    public void Kosong(){
@@ -115,9 +105,12 @@ public class LD_TidakRekon extends javax.swing.JFrame {
         cbSat.setSelectedItem(0);
         txTek.setText("");
         dataTabel();
+        isiComboId();
     }
    
     public void isiComboId(){
+        cbId.removeAllItems();
+        cbId.addItem("- pilih -");
         try {
              String sql ="SELECT * FROM pemakaian where status='Tidak Rekon'";
              st=conn.createStatement();
@@ -129,6 +122,7 @@ public class LD_TidakRekon extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane, "gagal "+e);
         }
+        
     }
     
     public void comboKlikId(){
@@ -138,7 +132,14 @@ public class LD_TidakRekon extends javax.swing.JFrame {
             rs=st.executeQuery(sql);
             while(rs.next()){
                 txPengeluaran.setText(rs.getString("id_pengeluaran"));
-                
+                String date = rs.getString("tgl_pemakaian");
+                java.util.Date tanggal = null;
+                try {
+                    tanggal = new SimpleDateFormat("dd MMMM yyyy").parse(date);
+                } catch (ParseException ex) {
+                    System.out.println(ex);
+                }
+                txTgl.setDate(tanggal);
                 txNoGg.setText(rs.getString("no_gangguan"));
                 txKel.setText(rs.getString("keluhan"));
                 txTin.setText(rs.getString("tindakan"));
@@ -147,7 +148,7 @@ public class LD_TidakRekon extends javax.swing.JFrame {
                 txidPel.setText(rs.getString("id_pelanggan"));
                 txnmPel.setText(rs.getString("nm_pelanggan"));
                 txAlamat.setText(rs.getString("alamat"));
-                txQty.setText(rs.getString("qty"));
+                nAwal = Integer.valueOf(rs.getString("qty"));
                 cbSat.setSelectedItem(rs.getString("satuan"));
                 txTek.setText(rs.getString("nm_teknisi"));
             }
@@ -157,17 +158,21 @@ public class LD_TidakRekon extends javax.swing.JFrame {
     }
     
     public void Ubah(){
+        if (txPengeluaran.getText().equals("")) {
+            JOptionPane.showMessageDialog(rootPane, "Maaf, mohon pilih data terlebih dahulu");
+        } else{
         try{
             String sql ="update pemakaian set id_pengeluaran=?, tgl_pemakaian=?, no_gangguan=?, "
                     + "keluhan=?, tindakan=?, id_material=?, nm_material=?, id_pelanggan=?, nm_pelanggan=?, alamat=?, qty=?, "
-                    + "satuan=?, nm_teknisi=? where id_pemakaian='"+cbId.getText()+"'";
-            if (cbId.getText().equals("")||txNoGg.getText().equals("")||
-                    txTek.getText().equals("")) { 
+                    + "satuan=?, nm_teknisi=?, status=? where id_pemakaian='"+cbId.getSelectedItem()+"'";
+            if (cbId.getSelectedItem().equals("")||txPengeluaran.getText().equals("")||
+                    txQty.getText().equals("")) { 
                 JOptionPane.showMessageDialog(rootPane, "Maaf kolom tidak boleh kosong!");
                 return;
             } else {
+            nAkhir = Integer.valueOf(txQty.getText());
             PreparedStatement stat = conn.prepareStatement(sql);
-            stat.setString(1,String.valueOf(txPengeluaran.getSelectedItem()));
+            stat.setString(1,String.valueOf(txPengeluaran.getText()));
             stat.setString(2, new SimpleDateFormat("dd MMMM yyyy").format(txTgl.getDate()));
             stat.setString(3 ,txNoGg.getText());
             stat.setString(4,txKel.getText());
@@ -180,39 +185,17 @@ public class LD_TidakRekon extends javax.swing.JFrame {
             stat.setString(11,txQty.getText());
             stat.setString(12,String.valueOf(cbSat.getSelectedItem()));
             stat.setString(13,txTek.getText());
+            stat.setString(14,statusP);
             stat.executeUpdate();
             stat.close();
-            JOptionPane.showMessageDialog(rootPane, "Data berhasil diubah");
+            JOptionPane.showMessageDialog(rootPane, "Data berhasil simpan");
             Kosong();
             } 
         }catch (SQLException e){
-            JOptionPane.showMessageDialog(rootPane, "Data gagal di ubah "+e);
+            JOptionPane.showMessageDialog(rootPane, "Data gagal di simpan "+e);
         }
-        btEdit.setEnabled(true);
+        }
     }
-    
-    public void Hapus(){
-        if (cbId.getText().equals("")||txNoGg.getText().equals("")||
-                    txTek.getText().equals("")) { 
-                JOptionPane.showMessageDialog(rootPane, "Maaf kolom tidak boleh kosong!");
-                return;
-        } else {
-            int ok = JOptionPane.showConfirmDialog(rootPane, "Anda yakin ingin menghapus data?","Konfirmasi", JOptionPane.YES_NO_OPTION);
-        if (ok==0){
-            String sql = "delete from pemakaian where id_pemakaian='"+cbId.getText()+"'";
-            try{
-                PreparedStatement stat = conn.prepareStatement(sql);
-                stat.executeUpdate();
-                JOptionPane.showMessageDialog(rootPane, "Data berhasil di hapus");
-                Kosong();
-            }catch (SQLException e){
-                JOptionPane.showMessageDialog(rootPane, "Data gagal di hapus "+e);
-            }
-        } else {
-            Kosong();
-        }
-        }
-    } 
     
     public void Cari(){
         int row=tbPemakaian.getRowCount();
@@ -281,13 +264,7 @@ public class LD_TidakRekon extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         cbSat = new javax.swing.JComboBox();
         btSave = new javax.swing.JButton();
-        btEdit = new javax.swing.JButton();
         btBatal = new javax.swing.JButton();
-        btHapus = new javax.swing.JButton();
-        btCetak = new javax.swing.JButton();
-        txTglB = new com.toedter.calendar.JDateChooser();
-        jLabel16 = new javax.swing.JLabel();
-        txTglA = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -328,7 +305,7 @@ public class LD_TidakRekon extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setText("Input Pemakaian Material Tidak Tekon");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 60, -1, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 70, -1, -1));
 
         tbPemakaian.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -348,7 +325,7 @@ public class LD_TidakRekon extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tbPemakaian);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 420, 860, 200));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, 850, 200));
 
         btCari.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icon/search.png"))); // NOI18N
         btCari.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -357,7 +334,7 @@ public class LD_TidakRekon extends javax.swing.JFrame {
                 btCariMouseClicked(evt);
             }
         });
-        jPanel1.add(btCari, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 390, -1, -1));
+        jPanel1.add(btCari, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 120, -1, -1));
 
         txCari.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txCari.setToolTipText("pencarian");
@@ -367,10 +344,10 @@ public class LD_TidakRekon extends javax.swing.JFrame {
                 txCariActionPerformed(evt);
             }
         });
-        jPanel1.add(txCari, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 390, 140, -1));
+        jPanel1.add(txCari, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, 140, -1));
 
         jSeparator1.setForeground(new java.awt.Color(51, 51, 51));
-        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 410, 140, -1));
+        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 140, 140, -1));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0))));
@@ -416,9 +393,19 @@ public class LD_TidakRekon extends javax.swing.JFrame {
         jPanel2.add(txPengeluaran, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 50, 140, -1));
 
         cbId.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "- pilih -" }));
+        cbId.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cbIdMouseClicked(evt);
+            }
+        });
+        cbId.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbIdActionPerformed(evt);
+            }
+        });
         jPanel2.add(cbId, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 20, 140, -1));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, 410, 240));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 380, 410, 240));
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0))));
@@ -464,7 +451,7 @@ public class LD_TidakRekon extends javax.swing.JFrame {
         cbSat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "pcs", "box", "lusin", "karton", "meter", " " }));
         jPanel4.add(cbSat, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 170, 70, -1));
 
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 110, 410, 240));
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 380, 410, 240));
 
         btSave.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         btSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icon/save.png"))); // NOI18N
@@ -480,23 +467,7 @@ public class LD_TidakRekon extends javax.swing.JFrame {
                 btSaveActionPerformed(evt);
             }
         });
-        jPanel1.add(btSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 370, 90, 30));
-
-        btEdit.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        btEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icon/edit.png"))); // NOI18N
-        btEdit.setText("Ubah");
-        btEdit.setToolTipText("ubah");
-        btEdit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btEdit.setFocusPainted(false);
-        btEdit.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btEdit.setIconTextGap(8);
-        btEdit.setMargin(new java.awt.Insets(2, 10, 2, 10));
-        btEdit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btEditActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 370, 90, 30));
+        jPanel1.add(btSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 640, 90, 30));
 
         btBatal.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         btBatal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icon/refresh.png"))); // NOI18N
@@ -512,52 +483,9 @@ public class LD_TidakRekon extends javax.swing.JFrame {
                 btBatalActionPerformed(evt);
             }
         });
-        jPanel1.add(btBatal, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 370, 90, 30));
+        jPanel1.add(btBatal, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 640, 90, 30));
 
-        btHapus.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        btHapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icon/delete.png"))); // NOI18N
-        btHapus.setText("Hapus");
-        btHapus.setToolTipText("hapus");
-        btHapus.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btHapus.setFocusPainted(false);
-        btHapus.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btHapus.setIconTextGap(8);
-        btHapus.setMargin(new java.awt.Insets(2, 10, 2, 10));
-        btHapus.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btHapusActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btHapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 370, 90, 30));
-
-        btCetak.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        btCetak.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icon/printer.png"))); // NOI18N
-        btCetak.setText("Cetak");
-        btCetak.setToolTipText("cetak");
-        btCetak.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btCetak.setFocusPainted(false);
-        btCetak.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btCetak.setIconTextGap(8);
-        btCetak.setMargin(new java.awt.Insets(2, 10, 2, 10));
-        btCetak.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btCetakActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btCetak, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 70, 90, 30));
-
-        txTglB.setToolTipText("sampai tanggal");
-        txTglB.setDateFormatString("dd/MM/yyyy");
-        jPanel1.add(txTglB, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 80, 100, -1));
-
-        jLabel16.setText("s/d");
-        jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 80, -1, 20));
-
-        txTglA.setToolTipText("dari tanggal");
-        txTglA.setDateFormatString("dd/MM/yyyy");
-        jPanel1.add(txTglA, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 80, 100, -1));
-
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 960, 660));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 960, 700));
 
         pack();
         setLocationRelativeTo(null);
@@ -599,35 +527,23 @@ public class LD_TidakRekon extends javax.swing.JFrame {
 
     private void btSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSaveActionPerformed
         // simpan
-        Simpan();
-    }//GEN-LAST:event_btSaveActionPerformed
-
-    private void btEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEditActionPerformed
-        // ubah
         Ubah();
-    }//GEN-LAST:event_btEditActionPerformed
+    }//GEN-LAST:event_btSaveActionPerformed
 
     private void btBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBatalActionPerformed
         // batal
         Kosong();
-        btEdit.setEnabled(false);
     }//GEN-LAST:event_btBatalActionPerformed
 
-    private void btHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btHapusActionPerformed
-        // hapus
-        Hapus();
-    }//GEN-LAST:event_btHapusActionPerformed
+    private void cbIdMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbIdMouseClicked
+        // TODO add your handling code here:
+        comboKlikId();
+    }//GEN-LAST:event_cbIdMouseClicked
 
-    private void btCetakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCetakActionPerformed
-        // cetak
-        String tagA = String.valueOf(txTglA.getDate());
-        String tagB = String.valueOf(txTglB.getDate());
-        if (tagA.equals("null") ||  tagB.equals("null")) {
-            JOptionPane.showMessageDialog(rootPane, "Pilih tanggal yang akan di cetak!");
-        } else {
-        makePreview("Pemakaian");
-        }
-    }//GEN-LAST:event_btCetakActionPerformed
+    private void cbIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbIdActionPerformed
+        // TODO add your handling code here:
+        comboKlikId();
+    }//GEN-LAST:event_cbIdActionPerformed
 
    
     public static void main(String args[]) {
@@ -642,9 +558,6 @@ public class LD_TidakRekon extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btBatal;
     private javax.swing.JLabel btCari;
-    private javax.swing.JButton btCetak;
-    private javax.swing.JButton btEdit;
-    private javax.swing.JButton btHapus;
     private javax.swing.JButton btSave;
     private javax.swing.JComboBox cbId;
     private javax.swing.JComboBox cbSat;
@@ -656,7 +569,6 @@ public class LD_TidakRekon extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -681,33 +593,10 @@ public class LD_TidakRekon extends javax.swing.JFrame {
     private javax.swing.JTextField txQty;
     private javax.swing.JTextField txTek;
     private com.toedter.calendar.JDateChooser txTgl;
-    private com.toedter.calendar.JDateChooser txTglA;
-    private com.toedter.calendar.JDateChooser txTglB;
     private javax.swing.JTextField txTin;
     private javax.swing.JTextField txidPel;
     private javax.swing.JTextField txnmPel;
     private javax.swing.JPanel window;
     // End of variables declaration//GEN-END:variables
-public void makePreview (String vName){
-        String tagA = String.valueOf(new SimpleDateFormat("dd MMMM yyyy").format(txTglA.getDate()));
-        String tagB = String.valueOf(new SimpleDateFormat("dd MMMM yyyy").format(txTglB.getDate()));
-        try {
-            String KopLaporan = getClass().getResource("/IMG/icon_telkom.png").toString();
-            String locFile = "src/report/";
-            String namaFile = locFile + vName + ".jasper";
-            Connection conn = new Koneksi().connect();
-            HashMap parameter = new HashMap();
-            parameter.put("Logo", KopLaporan);
-            parameter.put("txUser", Isi);
-            parameter.put("tglA", tagA);
-            parameter.put("tglB", tagB);
-            File report_file = new File (namaFile);
-            JasperReport jasperReport = (JasperReport) JRLoader.loadObject(report_file.getPath());
-            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameter, conn);
-            JasperViewer.viewReport(jasperPrint, false );
-            JasperViewer.setDefaultLookAndFeelDecorated(true);
-        } catch (Exception e){
-            JOptionPane.showMessageDialog(null, e.getMessage());
-        }
-    }
+
 }
