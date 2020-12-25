@@ -25,6 +25,7 @@ public class HmLeader extends javax.swing.JFrame {
     public HmLeader() {
         initComponents();
         notif();
+        notif2();
     }
     
     public JLabel getUser() {
@@ -53,6 +54,25 @@ public class HmLeader extends javax.swing.JFrame {
         } catch (Exception e) {
         }
     }
+    
+    public void notif2 (){
+        jpNotif1.setVisible(false);
+        try {
+            st=conn.createStatement();
+            String sql = "SELECT * FROM pemakaian WHERE status='Tidak Rekon'";
+            rs = st.executeQuery(sql);
+            if (rs.last()) {
+                int total= rs.getRow();
+                rs.beforeFirst();
+                
+                txJum1.setText(Integer.toString(total));
+                if (total>0) {
+                jpNotif1.setVisible(true);
+                }
+            }
+        } catch (Exception e) {
+        }
+    }
 
     
     @SuppressWarnings("unchecked")
@@ -74,7 +94,10 @@ public class HmLeader extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         btPemakaian = new javax.swing.JButton();
         btPermintaan = new javax.swing.JButton();
-        btPermintaan1 = new javax.swing.JButton();
+        btApprove = new javax.swing.JButton();
+        btTdkRekon = new javax.swing.JButton();
+        jpNotif1 = new javax.swing.JPanel();
+        txJum1 = new javax.swing.JLabel();
         jpNotif = new javax.swing.JPanel();
         txJum = new javax.swing.JLabel();
 
@@ -196,24 +219,54 @@ public class HmLeader extends javax.swing.JFrame {
                 btPermintaanActionPerformed(evt);
             }
         });
-        jPanel4.add(btPermintaan, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 190, 210, 150));
+        jPanel4.add(btPermintaan, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 190, 210, 150));
 
-        btPermintaan1.setBackground(new java.awt.Color(255, 0, 0));
-        btPermintaan1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
-        btPermintaan1.setForeground(new java.awt.Color(255, 255, 255));
-        btPermintaan1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/list.png"))); // NOI18N
-        btPermintaan1.setText("Di Approve");
-        btPermintaan1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btPermintaan1.setFocusPainted(false);
-        btPermintaan1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btPermintaan1.setRequestFocusEnabled(false);
-        btPermintaan1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btPermintaan1.addActionListener(new java.awt.event.ActionListener() {
+        btApprove.setBackground(new java.awt.Color(255, 0, 0));
+        btApprove.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
+        btApprove.setForeground(new java.awt.Color(255, 255, 255));
+        btApprove.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/list.png"))); // NOI18N
+        btApprove.setText("Di Approve");
+        btApprove.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btApprove.setFocusPainted(false);
+        btApprove.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btApprove.setRequestFocusEnabled(false);
+        btApprove.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btApprove.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btPermintaan1ActionPerformed(evt);
+                btApproveActionPerformed(evt);
             }
         });
-        jPanel4.add(btPermintaan1, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 190, 210, 150));
+        jPanel4.add(btApprove, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 190, 210, 150));
+
+        btTdkRekon.setBackground(new java.awt.Color(255, 0, 0));
+        btTdkRekon.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
+        btTdkRekon.setForeground(new java.awt.Color(255, 255, 255));
+        btTdkRekon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icon_input.png"))); // NOI18N
+        btTdkRekon.setText("Tidak Rekon");
+        btTdkRekon.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btTdkRekon.setFocusPainted(false);
+        btTdkRekon.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btTdkRekon.setRequestFocusEnabled(false);
+        btTdkRekon.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btTdkRekon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btTdkRekonActionPerformed(evt);
+            }
+        });
+        jPanel4.add(btTdkRekon, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 390, 210, 150));
+
+        jpNotif1.setBackground(new java.awt.Color(51, 204, 0));
+        jpNotif1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        txJum1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        txJum1.setForeground(new java.awt.Color(255, 255, 255));
+        txJum1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txJum1.setText("0");
+        txJum1.setToolTipText("Permintaan material");
+        txJum1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jpNotif1.add(txJum1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 40, 30));
+
+        jPanel4.add(jpNotif1, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 360, 40, 30));
 
         jpNotif.setBackground(new java.awt.Color(51, 204, 0));
         jpNotif.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -266,12 +319,17 @@ public class HmLeader extends javax.swing.JFrame {
         ldp.setVisible(true);
     }//GEN-LAST:event_btPemakaianActionPerformed
 
-    private void btPermintaan1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPermintaan1ActionPerformed
+    private void btApproveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btApproveActionPerformed
         // TODO add your handling code here:
         LD_PermintaanApprove lpa = new LD_PermintaanApprove();
         lpa.setVisible(true);
         lpa.Isi = txUser.getText();
-    }//GEN-LAST:event_btPermintaan1ActionPerformed
+    }//GEN-LAST:event_btApproveActionPerformed
+
+    private void btTdkRekonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTdkRekonActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_btTdkRekonActionPerformed
 
     public static void main(String args[]) {
         
@@ -284,11 +342,12 @@ public class HmLeader extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btAbout;
+    private javax.swing.JButton btApprove;
     private javax.swing.JLabel btHelp;
     private javax.swing.JButton btLogout;
     private javax.swing.JButton btPemakaian;
     private javax.swing.JButton btPermintaan;
-    private javax.swing.JButton btPermintaan1;
+    private javax.swing.JButton btTdkRekon;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -299,7 +358,9 @@ public class HmLeader extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jpNotif;
+    private javax.swing.JPanel jpNotif1;
     private javax.swing.JLabel txJum;
+    private javax.swing.JLabel txJum1;
     private javax.swing.JLabel txUser;
     // End of variables declaration//GEN-END:variables
 }

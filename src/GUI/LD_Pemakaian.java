@@ -30,6 +30,7 @@ public class LD_Pemakaian extends javax.swing.JFrame {
     ResultSet rs;
     makePreview mp = new makePreview();
     public String Isi = null;
+    String statusP = "pakai";
     
 
     
@@ -167,7 +168,6 @@ public class LD_Pemakaian extends javax.swing.JFrame {
             while(rs.next()){
                 txIdM.setText(rs.getString("id_material"));
                 txNmMat.setText(rs.getString("nm_material"));
-                txQty.setText(rs.getString("qty"));
                 cbSat.setSelectedItem(rs.getString("satuan"));
                 txTek.setText(rs.getString("nm_teknisi"));
             }
@@ -177,7 +177,7 @@ public class LD_Pemakaian extends javax.swing.JFrame {
     }
    
     public void Simpan(){
-        String sql = "insert into pemakaian values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "insert into pemakaian values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         try {
             if (txId.getText().equals("")||txNoGg.getText().equals("")||
                     txTek.getText().equals("")) { 
@@ -199,6 +199,7 @@ public class LD_Pemakaian extends javax.swing.JFrame {
             stat.setString(12, txQty.getText());
             stat.setString(13, String.valueOf(cbSat.getSelectedItem()));
             stat.setString(14, txTek.getText());
+            stat.setString(15, statusP);
             stat.executeUpdate();
             stat.close();
             JOptionPane.showMessageDialog(rootPane, "Data berhasil disimpan");

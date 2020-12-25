@@ -53,7 +53,7 @@ public class CO_Rekon extends javax.swing.JFrame {
         Object [] baris = {"ID Pakai","Tanggal Pakai","id Material","Nama Material","Qty Pakai","Satuan","ID Keluar","Tanggal Keluar","Qty Keluar","Satuan"};
         tabmode = new DefaultTableModel(null, baris);
         tbPemakaian.setModel(tabmode);
-        String sql="select*from pengeluaran, pemakaian where pengeluaran.id_pengeluaran = pemakaian.id_pengeluaran";
+        String sql="select*from pengeluaran, pemakaian where pengeluaran.id_pengeluaran = pemakaian.id_pengeluaran and pemakaian.status='pakai'";
         try {
             java.sql.Statement stat = conn.createStatement();
             ResultSet hasil = stat.executeQuery(sql);
@@ -116,44 +116,72 @@ public class CO_Rekon extends javax.swing.JFrame {
         QtyKeluar = tabmode.getValueAt(bar, 8).toString();
         SatKeluar = tabmode.getValueAt(bar, 9).toString();
         btRekon.setEnabled(true);
-        System.out.println(idPakai+idMaterial+nmMaterial+QtyPakai+SatPakai+idKeluar+QtyKeluar+SatKeluar);
+    } 
+    
+    public void Update2(){
+        try {
+            String sql = "update pemakaian set status=? where id_pemakaian='"+idPakai+"'";
+            PreparedStatement stat = conn.prepareStatement(sql);
+                    stat.setString(1, StatusY);
+                    stat.executeUpdate();
+                    stat.close();
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(rootPane, e);
+                }
+    }
+    
+    public void Update1(){
+        try {
+                    String sql = "update pemakaian set status=? where id_pemakaian='"+idPakai+"'";
+                    PreparedStatement stat = conn.prepareStatement(sql);
+                    stat.setString(1, StatusN);
+                    stat.executeUpdate();
+                    stat.close();
+                    JOptionPane.showMessageDialog(rootPane, "Data gagal di Rekon dan akan di kembalikan ke leader");
+                    dataTabel2();
+                    dataTabel();
+                    btRekon.setEnabled(false);
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(rootPane, "Data gagal di Rekon atau sudah di Rekon ");
+                    btRekon.setEnabled(false);
+                }
     }
     
     public void Simpan(){
-        if (QtyPakai.equals(QtyKeluar)) {
-            Status = StatusY;
-        } else  {
-            Status = StatusN;
-        }
+        
         String sql = "insert into rekon values (?,?,?,?,?,?,?,?,?,?)";
         int ok = JOptionPane.showConfirmDialog(rootPane, "Apakah anda yakin merekon material keluar "
                 + "dengan id material "+idMaterial+" dengan qty pakai = "+QtyPakai+" dan qty keluar = "+QtyKeluar+" "
-                + "dengan status "+Status+" ?","Konfirmasi", JOptionPane.YES_NO_OPTION);
+                + "","Konfirmasi", JOptionPane.YES_NO_OPTION);
         if (ok==0){
-        try {
-            PreparedStatement stat = conn.prepareStatement(sql);
-            stat.setString(1,idPakai);
-            stat.setString(2,idMaterial);
-            stat.setString(3,nmMaterial);
-            stat.setString(4,QtyPakai);
-            stat.setString(5,SatPakai);
-            stat.setString(6,idKeluar);
-            stat.setString(7,QtyKeluar);
-            stat.setString(8,SatKeluar);
-            stat.setString(9,tglRekon);
-            stat.setString(10,Status);
-
-            stat.executeUpdate();
-            stat.close();
-            dataTabel2();
-            dataTabel();
-            btRekon.setEnabled(false);
-            JOptionPane.showMessageDialog(rootPane, "Data Data Berhasil di Rekon");
-            
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(rootPane, "Data gagal di Rekon atau sudah di Rekon ");
-            btRekon.setEnabled(false);
-        }
+            if (QtyPakai.equals(QtyKeluar)) {
+                try {
+                    PreparedStatement stat = conn.prepareStatement(sql);
+                    stat.setString(1,idPakai);
+                    stat.setString(2,idMaterial);
+                    stat.setString(3,nmMaterial);
+                    stat.setString(4,QtyPakai);
+                    stat.setString(5,SatPakai);
+                    stat.setString(6,idKeluar);
+                    stat.setString(7,QtyKeluar);
+                    stat.setString(8,SatKeluar);
+                    stat.setString(9,tglRekon);
+                    stat.setString(10,StatusY);
+                    stat.executeUpdate();
+                    stat.close();
+                    Update2();
+                    dataTabel2();
+                    dataTabel();
+                    btRekon.setEnabled(false);
+                    JOptionPane.showMessageDialog(rootPane, "Data Berhasil di Rekon");
+                } catch (SQLException e) {
+                    JOptionPane.showMessageDialog(rootPane, "Data gagal di Rekon atau sudah di Rekon ");
+                    btRekon.setEnabled(false);
+                }
+        
+            } else  {
+                Update1();
+            }
         }
     }
     
