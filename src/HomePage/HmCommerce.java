@@ -5,6 +5,8 @@ import GUI.CO_Rekon;
 import GUI.X_About;
 import GUI.X_Help;
 import Sistem.Login;
+import java.awt.Image;
+import java.awt.Toolkit;
 import javax.swing.JLabel;
 
 
@@ -13,6 +15,12 @@ public class HmCommerce extends javax.swing.JFrame {
     
     public HmCommerce() {
         initComponents();
+        iconLogo();
+    }
+    
+    public void iconLogo(){
+        Image icon = Toolkit.getDefaultToolkit().getImage("src/IMG/icon/iconWindow.png");
+        setIconImage(icon);
     }
     
     public JLabel getUser() {

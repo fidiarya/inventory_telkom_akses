@@ -8,6 +8,8 @@ import GUI.LD_TidakRekon;
 import GUI.X_About;
 import GUI.X_Help;
 import Sistem.Login;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -25,8 +27,14 @@ public class HmLeader extends javax.swing.JFrame {
     
     public HmLeader() {
         initComponents();
+        iconLogo();
         notif();
         notif2();
+    }
+    
+    public void iconLogo(){
+        Image icon = Toolkit.getDefaultToolkit().getImage("src/IMG/icon/iconWindow.png");
+        setIconImage(icon);
     }
     
     public JLabel getUser() {

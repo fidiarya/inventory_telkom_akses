@@ -20,7 +20,7 @@ public class LD_TidakRekon extends javax.swing.JFrame {
     private DefaultTableModel tabmode;
     Statement st ;
     ResultSet rs;
-    String statusP = "pakai" ;
+    String statusP = "pakai";
     int nAwal=0, nAkhir=0, QtyKel=0;
     
 
@@ -185,12 +185,12 @@ public class LD_TidakRekon extends javax.swing.JFrame {
                 } else {
                     isiDataQty();
                     int QtyInput = Integer.valueOf(txQty.getText());
-                    if (QtyInput > QtyKel) {
+                    nAkhir = Integer.valueOf(txQty.getText());
+                    int total=nAwal + nAkhir;
+                    if (total > QtyKel) {
                         JOptionPane.showMessageDialog(rootPane, "Maaf, Qty yang anda input melebihi Qty material keluar = "+QtyKel+"");
                         txQty.requestFocus();
                     } else {
-                        nAkhir = Integer.valueOf(txQty.getText());
-                        int total=nAwal + nAkhir;
                         PreparedStatement stat = conn.prepareStatement(sql);
                         stat.setString(1,String.valueOf(txPengeluaran.getText()));
                         stat.setString(2, new SimpleDateFormat("dd MMMM yyyy").format(txTgl.getDate()));
