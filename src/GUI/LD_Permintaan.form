@@ -239,7 +239,7 @@
                     <StringItem index="1" value="box"/>
                     <StringItem index="2" value="lusin"/>
                     <StringItem index="3" value="karton"/>
-                    <StringItem index="4" value=" "/>
+                    <StringItem index="4" value="meter"/>
                   </StringArray>
                 </Property>
               </Properties>

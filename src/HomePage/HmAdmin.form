@@ -287,7 +287,7 @@
         <Container class="javax.swing.JPanel" name="jpNotif">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="33" red="0" type="rgb"/>
+              <Color blue="0" green="cc" red="33" type="rgb"/>
             </Property>
           </Properties>
           <Constraints>

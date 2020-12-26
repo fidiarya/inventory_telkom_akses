@@ -31,8 +31,7 @@ public class LD_Pemakaian extends javax.swing.JFrame {
     makePreview mp = new makePreview();
     public String Isi = null;
     String statusP = "pakai";
-    
-
+    int QtyKel=0;
     
     public LD_Pemakaian() {
         initComponents();
@@ -100,6 +99,20 @@ public class LD_Pemakaian extends javax.swing.JFrame {
              JOptionPane.showMessageDialog(null, e);
          }
      }
+    
+    public void isiDataQty(){
+        try {
+             String sql ="SELECT * FROM pengeluaran where id_pengeluaran='"+cbPengeluaran.getSelectedItem()+"'";
+             st=conn.createStatement();
+             rs=st.executeQuery(sql);
+             while(rs.next()){
+                QtyKel = Integer.valueOf(rs.getString("qty"));
+             }
+             rs.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, "gagal "+e);
+        }
+    }
     
     public void tabelKlik(){
         int bar = tbPemakaian.getSelectedRow();
@@ -184,26 +197,32 @@ public class LD_Pemakaian extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(rootPane, "Maaf kolom tidak boleh kosong!");
                 return;
             } else {
-            PreparedStatement stat = conn.prepareStatement(sql);
-            stat.setString(1, txId.getText());
-            stat.setString(2, String.valueOf(cbPengeluaran.getSelectedItem()));
-            stat.setString(3, new SimpleDateFormat("dd MMMM yyyy").format(txTgl.getDate()));
-            stat.setString(4, txNoGg.getText());
-            stat.setString(5, txKel.getText());
-            stat.setString(6, txTin.getText());
-            stat.setString(7, txIdM.getText());
-            stat.setString(8, txNmMat.getText());
-            stat.setString(9, txidPel.getText());
-            stat.setString(10, txnmPel.getText());
-            stat.setString(11, txAlamat.getText());
-            stat.setString(12, txQty.getText());
-            stat.setString(13, String.valueOf(cbSat.getSelectedItem()));
-            stat.setString(14, txTek.getText());
-            stat.setString(15, statusP);
-            stat.executeUpdate();
-            stat.close();
-            JOptionPane.showMessageDialog(rootPane, "Data berhasil disimpan");
-            Kosong();
+                isiDataQty();
+                int QtyInput = Integer.valueOf(txQty.getText());
+                if (QtyInput > QtyKel) {
+                    JOptionPane.showMessageDialog(rootPane, "Maaf Qty yang anda input melebihi Qty material keluar = "+QtyKel+"");
+                } else  {
+                    PreparedStatement stat = conn.prepareStatement(sql);
+                    stat.setString(1, txId.getText());
+                    stat.setString(2, String.valueOf(cbPengeluaran.getSelectedItem()));
+                    stat.setString(3, new SimpleDateFormat("dd MMMM yyyy").format(txTgl.getDate()));
+                    stat.setString(4, txNoGg.getText());
+                    stat.setString(5, txKel.getText());
+                    stat.setString(6, txTin.getText());
+                    stat.setString(7, txIdM.getText());
+                    stat.setString(8, txNmMat.getText());
+                    stat.setString(9, txidPel.getText());
+                    stat.setString(10, txnmPel.getText());
+                    stat.setString(11, txAlamat.getText());
+                    stat.setString(12, txQty.getText());
+                    stat.setString(13, String.valueOf(cbSat.getSelectedItem()));
+                    stat.setString(14, txTek.getText());
+                    stat.setString(15, statusP);
+                    stat.executeUpdate();
+                    stat.close();
+                    JOptionPane.showMessageDialog(rootPane, "Data berhasil disimpan");
+                    Kosong();
+                }
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(rootPane, "Data gagal disimpan "+e);
@@ -507,7 +526,7 @@ public class LD_Pemakaian extends javax.swing.JFrame {
         jLabel6.setText("Nama Material");
         jPanel4.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 110, -1));
 
-        cbSat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "pcs", "box", "lusin", "karton", " " }));
+        cbSat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "pcs", "box", "lusin", "karton", "meter" }));
         jPanel4.add(cbSat, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 170, 70, -1));
 
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 110, 410, 240));

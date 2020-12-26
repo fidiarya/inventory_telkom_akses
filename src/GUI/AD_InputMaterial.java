@@ -349,7 +349,7 @@ public class AD_InputMaterial extends javax.swing.JFrame {
         });
         jPanel2.add(cbidVendor, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, 100, -1));
 
-        cbSat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "pcs", "box", "lusin", "karton", " " }));
+        cbSat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "pcs", "box", "lusin", "karton", "meter" }));
         jPanel2.add(cbSat, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 180, 70, -1));
 
         jLabel8.setText("id Vendor ");

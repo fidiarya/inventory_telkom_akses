@@ -215,7 +215,7 @@ public class HmAdmin extends javax.swing.JFrame {
         jLabel6.setText("Info Stock Material ");
         jPanel4.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 380, -1, -1));
 
-        jpNotif.setBackground(new java.awt.Color(0, 51, 255));
+        jpNotif.setBackground(new java.awt.Color(51, 204, 0));
         jpNotif.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txJum.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N

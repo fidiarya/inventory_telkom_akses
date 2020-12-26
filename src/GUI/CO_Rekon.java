@@ -132,19 +132,19 @@ public class CO_Rekon extends javax.swing.JFrame {
     
     public void Update1(){
         try {
-                    String sql = "update pemakaian set status=? where id_pemakaian='"+idPakai+"'";
-                    PreparedStatement stat = conn.prepareStatement(sql);
-                    stat.setString(1, StatusN);
-                    stat.executeUpdate();
-                    stat.close();
-                    JOptionPane.showMessageDialog(rootPane, "Data gagal di Rekon dan akan di kembalikan ke leader");
-                    dataTabel2();
-                    dataTabel();
-                    btRekon.setEnabled(false);
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(rootPane, "Data gagal di Rekon atau sudah di Rekon ");
-                    btRekon.setEnabled(false);
-                }
+                String sql = "update pemakaian set status=? where id_pemakaian='"+idPakai+"'";
+                PreparedStatement stat = conn.prepareStatement(sql);
+                stat.setString(1, StatusN);
+                stat.executeUpdate();
+                stat.close();
+                JOptionPane.showMessageDialog(rootPane, "Data Tidak Rekon dan akan di kembalikan ke leader");
+                dataTabel2();
+                dataTabel();
+                btRekon.setEnabled(false);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(rootPane, "Data gagal di Rekon atau sudah di Rekon ");
+                btRekon.setEnabled(false);
+        }
     }
     
     public void Simpan(){

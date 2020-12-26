@@ -504,7 +504,7 @@ public class AD_Penerimaan extends javax.swing.JFrame {
         });
         jPanel2.add(txNmVendor, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 180, 130, -1));
 
-        cbSat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "pcs", "box", "lusin", "karton", " " }));
+        cbSat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "pcs", "box", "lusin", "karton", "meter" }));
         jPanel2.add(cbSat, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 240, 70, -1));
 
         jLabel8.setText("id Vendor ");

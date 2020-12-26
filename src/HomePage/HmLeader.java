@@ -4,6 +4,7 @@ package HomePage;
 import GUI.LD_Pemakaian;
 import GUI.LD_Permintaan;
 import GUI.LD_PermintaanApprove;
+import GUI.LD_TidakRekon;
 import GUI.X_About;
 import GUI.X_Help;
 import Sistem.Login;
@@ -100,6 +101,7 @@ public class HmLeader extends javax.swing.JFrame {
         txJum1 = new javax.swing.JLabel();
         jpNotif = new javax.swing.JPanel();
         txJum = new javax.swing.JLabel();
+        btRefresh = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1280, 720));
@@ -281,6 +283,16 @@ public class HmLeader extends javax.swing.JFrame {
 
         jPanel4.add(jpNotif, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 160, 40, 30));
 
+        btRefresh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icon/refresh.png"))); // NOI18N
+        btRefresh.setToolTipText("Refresh");
+        btRefresh.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btRefresh.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btRefreshMouseClicked(evt);
+            }
+        });
+        jPanel4.add(btRefresh, new org.netbeans.lib.awtextra.AbsoluteConstraints(1240, 120, -1, -1));
+
         getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 720));
 
         pack();
@@ -328,8 +340,16 @@ public class HmLeader extends javax.swing.JFrame {
 
     private void btTdkRekonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTdkRekonActionPerformed
         // TODO add your handling code here:
+        LD_TidakRekon ltr = new LD_TidakRekon();
+        ltr.setVisible(true);
         
     }//GEN-LAST:event_btTdkRekonActionPerformed
+
+    private void btRefreshMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btRefreshMouseClicked
+        // TODO add your handling code here:
+        notif();
+        notif2();
+    }//GEN-LAST:event_btRefreshMouseClicked
 
     public static void main(String args[]) {
         
@@ -347,6 +367,7 @@ public class HmLeader extends javax.swing.JFrame {
     private javax.swing.JButton btLogout;
     private javax.swing.JButton btPemakaian;
     private javax.swing.JButton btPermintaan;
+    private javax.swing.JLabel btRefresh;
     private javax.swing.JButton btTdkRekon;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

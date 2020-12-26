@@ -1,7 +1,6 @@
 
 package GUI;
 
-import Sistem.makePreview;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -22,7 +21,7 @@ public class LD_TidakRekon extends javax.swing.JFrame {
     Statement st ;
     ResultSet rs;
     String statusP = "pakai" ;
-    int nAwal=0, nAkhir=0, total=nAwal + nAkhir;
+    int nAwal=0, nAkhir=0, QtyKel=0;
     
 
     
@@ -108,6 +107,20 @@ public class LD_TidakRekon extends javax.swing.JFrame {
         isiComboId();
     }
    
+   public void isiDataQty(){
+        try {
+             String sql ="SELECT * FROM pengeluaran where id_pengeluaran='"+txPengeluaran.getText()+"'";
+             st=conn.createStatement();
+             rs=st.executeQuery(sql);
+             while(rs.next()){
+                QtyKel = Integer.valueOf(rs.getString("qty"));
+             }
+             rs.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, "gagal "+e);
+        }
+    }
+   
     public void isiComboId(){
         cbId.removeAllItems();
         cbId.addItem("- pilih -");
@@ -122,7 +135,6 @@ public class LD_TidakRekon extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane, "gagal "+e);
         }
-        
     }
     
     public void comboKlikId(){
@@ -161,39 +173,48 @@ public class LD_TidakRekon extends javax.swing.JFrame {
         if (txPengeluaran.getText().equals("")) {
             JOptionPane.showMessageDialog(rootPane, "Maaf, mohon pilih data terlebih dahulu");
         } else{
-        try{
-            String sql ="update pemakaian set id_pengeluaran=?, tgl_pemakaian=?, no_gangguan=?, "
-                    + "keluhan=?, tindakan=?, id_material=?, nm_material=?, id_pelanggan=?, nm_pelanggan=?, alamat=?, qty=?, "
-                    + "satuan=?, nm_teknisi=?, status=? where id_pemakaian='"+cbId.getSelectedItem()+"'";
-            if (cbId.getSelectedItem().equals("")||txPengeluaran.getText().equals("")||
-                    txQty.getText().equals("")) { 
-                JOptionPane.showMessageDialog(rootPane, "Maaf kolom tidak boleh kosong!");
-                return;
-            } else {
-            nAkhir = Integer.valueOf(txQty.getText());
-            PreparedStatement stat = conn.prepareStatement(sql);
-            stat.setString(1,String.valueOf(txPengeluaran.getText()));
-            stat.setString(2, new SimpleDateFormat("dd MMMM yyyy").format(txTgl.getDate()));
-            stat.setString(3 ,txNoGg.getText());
-            stat.setString(4,txKel.getText());
-            stat.setString(5,txTin.getText());
-            stat.setString(6,txIdM.getText());
-            stat.setString(7,txNmMat.getText());
-            stat.setString(8,txidPel.getText());
-            stat.setString(9,txnmPel.getText());
-            stat.setString(10,txAlamat.getText());
-            stat.setString(11,txQty.getText());
-            stat.setString(12,String.valueOf(cbSat.getSelectedItem()));
-            stat.setString(13,txTek.getText());
-            stat.setString(14,statusP);
-            stat.executeUpdate();
-            stat.close();
-            JOptionPane.showMessageDialog(rootPane, "Data berhasil simpan");
-            Kosong();
-            } 
-        }catch (SQLException e){
-            JOptionPane.showMessageDialog(rootPane, "Data gagal di simpan "+e);
-        }
+            try{
+                String sql ="update pemakaian set id_pengeluaran=?, tgl_pemakaian=?, no_gangguan=?, "
+                        + "keluhan=?, tindakan=?, id_material=?, nm_material=?, id_pelanggan=?, nm_pelanggan=?, alamat=?, qty=?, "
+                        + "satuan=?, nm_teknisi=?, status=? where id_pemakaian='"+cbId.getSelectedItem()+"'";
+                if (cbId.getSelectedItem().equals("")||txPengeluaran.getText().equals("")||
+                        txQty.getText().equals("")) { 
+                    JOptionPane.showMessageDialog(rootPane, "Maaf kolom tidak boleh kosong!");
+                    txQty.requestFocus();
+                    return;
+                } else {
+                    isiDataQty();
+                    int QtyInput = Integer.valueOf(txQty.getText());
+                    if (QtyInput > QtyKel) {
+                        JOptionPane.showMessageDialog(rootPane, "Maaf, Qty yang anda input melebihi Qty material keluar = "+QtyKel+"");
+                        txQty.requestFocus();
+                    } else {
+                        nAkhir = Integer.valueOf(txQty.getText());
+                        int total=nAwal + nAkhir;
+                        PreparedStatement stat = conn.prepareStatement(sql);
+                        stat.setString(1,String.valueOf(txPengeluaran.getText()));
+                        stat.setString(2, new SimpleDateFormat("dd MMMM yyyy").format(txTgl.getDate()));
+                        stat.setString(3,txNoGg.getText());
+                        stat.setString(4,txKel.getText());
+                        stat.setString(5,txTin.getText());
+                        stat.setString(6,txIdM.getText());
+                        stat.setString(7,txNmMat.getText());
+                        stat.setString(8,txidPel.getText());
+                        stat.setString(9,txnmPel.getText());
+                        stat.setString(10,txAlamat.getText());
+                        stat.setString(11,String.valueOf(total));
+                        stat.setString(12,String.valueOf(cbSat.getSelectedItem()));
+                        stat.setString(13,txTek.getText());
+                        stat.setString(14,statusP);
+                        stat.executeUpdate();
+                        stat.close();
+                        JOptionPane.showMessageDialog(rootPane, "Data berhasil di simpan");
+                        Kosong();
+                    }
+                } 
+            }catch (SQLException e){
+                JOptionPane.showMessageDialog(rootPane, "Data gagal di simpan "+e);
+            }
         }
     }
     
@@ -387,6 +408,7 @@ public class LD_TidakRekon extends javax.swing.JFrame {
         jPanel2.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 110, -1));
 
         txTgl.setDateFormatString("dd MMMM yyyy");
+        txTgl.setEnabled(false);
         jPanel2.add(txTgl, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 80, 140, -1));
 
         txPengeluaran.setEditable(false);
@@ -449,6 +471,7 @@ public class LD_TidakRekon extends javax.swing.JFrame {
         jPanel4.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 110, -1));
 
         cbSat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "pcs", "box", "lusin", "karton", "meter", " " }));
+        cbSat.setEnabled(false);
         jPanel4.add(cbSat, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 170, 70, -1));
 
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 380, 410, 240));
