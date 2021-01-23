@@ -337,6 +337,7 @@ public class HmLeader extends javax.swing.JFrame {
         // TODO add your handling code here:
         LD_Pemakaian ldp = new LD_Pemakaian();
         ldp.setVisible(true);
+        ldp.Isi = txUser.getText();
     }//GEN-LAST:event_btPemakaianActionPerformed
 
     private void btApproveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btApproveActionPerformed

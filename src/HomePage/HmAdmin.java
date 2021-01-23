@@ -26,7 +26,7 @@ public class HmAdmin extends javax.swing.JFrame {
     
     public HmAdmin() {
         initComponents();
-        dataTabel();
+//        dataTabel();
         notif();
         iconLogo();
     }
@@ -63,28 +63,28 @@ public class HmAdmin extends javax.swing.JFrame {
         }
     }
     
-    public void dataTabel(){
-        Object [] baris = {"id Material","Nama Material","id Vendor","Qty","Satuan"};
-        tabmode = new DefaultTableModel(null, baris);
-        tbStock.setModel(tabmode);
-        String sql="select*from tb_material";
-        try {
-            java.sql.Statement stat = conn.createStatement();
-            ResultSet hasil = stat.executeQuery(sql);
-            while (hasil.next()){
-            String id = hasil.getString("id_material");
-            String nm = hasil.getString("nm_material");
-            String iv = hasil.getString("id_vendor");
-            String qty = hasil.getString("qty");
-            String sat = hasil.getString("satuan");
-           
-            String[]data = {id,nm,iv,qty,sat};
-            tabmode.addRow(data);
-            }
-        }catch (Exception e) {
-            System.err.println(e);
-        }
-    }
+//    public void dataTabel(){
+//        Object [] baris = {"id Material","Nama Material","id Vendor","Qty","Satuan"};
+//        tabmode = new DefaultTableModel(null, baris);
+//        tbStock.setModel(tabmode);
+//        String sql="select*from tb_material";
+//        try {
+//            java.sql.Statement stat = conn.createStatement();
+//            ResultSet hasil = stat.executeQuery(sql);
+//            while (hasil.next()){
+//            String id = hasil.getString("id_material");
+//            String nm = hasil.getString("nm_material");
+//            String iv = hasil.getString("id_vendor");
+//            String qty = hasil.getString("qty");
+//            String sat = hasil.getString("satuan");
+//           
+//            String[]data = {id,nm,iv,qty,sat};
+//            tabmode.addRow(data);
+//            }
+//        }catch (Exception e) {
+//            System.err.println(e);
+//        }
+//    }
 
     
     @SuppressWarnings("unchecked")
@@ -103,9 +103,6 @@ public class HmAdmin extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tbStock = new javax.swing.JTable();
-        jLabel6 = new javax.swing.JLabel();
         jpNotif = new javax.swing.JPanel();
         txJum = new javax.swing.JLabel();
         btMKel = new javax.swing.JButton();
@@ -113,6 +110,9 @@ public class HmAdmin extends javax.swing.JFrame {
         btTambah = new javax.swing.JButton();
         btTambahVendor = new javax.swing.JButton();
         btRefresh = new javax.swing.JLabel();
+        btPengadaan = new javax.swing.JButton();
+        btStok = new javax.swing.JButton();
+        btDataApprove = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("  Halaman Admin");
@@ -196,25 +196,6 @@ public class HmAdmin extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icon_telkom.png"))); // NOI18N
         jPanel4.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 600, -1, -1));
 
-        tbStock.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(tbStock);
-
-        jPanel4.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 410, 670, 190));
-
-        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel6.setText("Info Stock Material ");
-        jPanel4.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 380, -1, -1));
-
         jpNotif.setBackground(new java.awt.Color(51, 204, 0));
         jpNotif.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -226,7 +207,7 @@ public class HmAdmin extends javax.swing.JFrame {
         txJum.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jpNotif.add(txJum, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 40, 30));
 
-        jPanel4.add(jpNotif, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 160, 40, 30));
+        jPanel4.add(jpNotif, new org.netbeans.lib.awtextra.AbsoluteConstraints(1200, 160, 40, 30));
 
         btMKel.setBackground(new java.awt.Color(255, 0, 0));
         btMKel.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
@@ -243,13 +224,13 @@ public class HmAdmin extends javax.swing.JFrame {
                 btMKelActionPerformed(evt);
             }
         });
-        jPanel4.add(btMKel, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 190, 210, 150));
+        jPanel4.add(btMKel, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 190, 210, 150));
 
         btMMas.setBackground(new java.awt.Color(255, 0, 0));
         btMMas.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
         btMMas.setForeground(new java.awt.Color(255, 255, 255));
         btMMas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icon_input.png"))); // NOI18N
-        btMMas.setText("Material Masuk");
+        btMMas.setText("Penerimaan Material");
         btMMas.setToolTipText("Input material masuk");
         btMMas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btMMas.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -260,7 +241,7 @@ public class HmAdmin extends javax.swing.JFrame {
                 btMMasActionPerformed(evt);
             }
         });
-        jPanel4.add(btMMas, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 190, 210, 150));
+        jPanel4.add(btMMas, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 190, 210, 150));
 
         btTambah.setBackground(new java.awt.Color(255, 0, 0));
         btTambah.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -278,7 +259,7 @@ public class HmAdmin extends javax.swing.JFrame {
                 btTambahActionPerformed(evt);
             }
         });
-        jPanel4.add(btTambah, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 370, 30, 30));
+        jPanel4.add(btTambah, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 630, 30, 30));
 
         btTambahVendor.setBackground(new java.awt.Color(255, 0, 0));
         btTambahVendor.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -296,7 +277,7 @@ public class HmAdmin extends javax.swing.JFrame {
                 btTambahVendorActionPerformed(evt);
             }
         });
-        jPanel4.add(btTambahVendor, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 370, 30, 30));
+        jPanel4.add(btTambahVendor, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 630, 30, 30));
 
         btRefresh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icon/refresh.png"))); // NOI18N
         btRefresh.setToolTipText("Refresh");
@@ -307,6 +288,57 @@ public class HmAdmin extends javax.swing.JFrame {
             }
         });
         jPanel4.add(btRefresh, new org.netbeans.lib.awtextra.AbsoluteConstraints(1230, 120, -1, -1));
+
+        btPengadaan.setBackground(new java.awt.Color(255, 0, 0));
+        btPengadaan.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
+        btPengadaan.setForeground(new java.awt.Color(255, 255, 255));
+        btPengadaan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icon_input.png"))); // NOI18N
+        btPengadaan.setText("Pengadaan Material");
+        btPengadaan.setToolTipText("Input material masuk");
+        btPengadaan.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btPengadaan.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btPengadaan.setRequestFocusEnabled(false);
+        btPengadaan.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btPengadaan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btPengadaanActionPerformed(evt);
+            }
+        });
+        jPanel4.add(btPengadaan, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 190, 210, 150));
+
+        btStok.setBackground(new java.awt.Color(255, 0, 0));
+        btStok.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
+        btStok.setForeground(new java.awt.Color(255, 255, 255));
+        btStok.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icon_input.png"))); // NOI18N
+        btStok.setText("Data Stok Material");
+        btStok.setToolTipText("Input material masuk");
+        btStok.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btStok.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btStok.setRequestFocusEnabled(false);
+        btStok.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btStok.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btStokActionPerformed(evt);
+            }
+        });
+        jPanel4.add(btStok, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 410, 210, 150));
+
+        btDataApprove.setBackground(new java.awt.Color(255, 0, 0));
+        btDataApprove.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
+        btDataApprove.setForeground(new java.awt.Color(255, 255, 255));
+        btDataApprove.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icon_input.png"))); // NOI18N
+        btDataApprove.setText("Data Approve");
+        btDataApprove.setToolTipText("Input material masuk");
+        btDataApprove.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btDataApprove.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btDataApprove.setRequestFocusEnabled(false);
+        btDataApprove.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btDataApprove.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btDataApproveActionPerformed(evt);
+            }
+        });
+        jPanel4.add(btDataApprove, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 410, 210, 150));
 
         getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 720));
 
@@ -338,6 +370,7 @@ public class HmAdmin extends javax.swing.JFrame {
     private void btMMasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btMMasActionPerformed
         // masuk
         AD_Penerimaan ap = new AD_Penerimaan();
+        ap.Isi = (txUser.getText());
         ap.setVisible(true);
     }//GEN-LAST:event_btMMasActionPerformed
 
@@ -361,9 +394,21 @@ public class HmAdmin extends javax.swing.JFrame {
 
     private void btRefreshMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btRefreshMouseClicked
         // TODO add your handling code here:
-        dataTabel();
+//        dataTabel();
         notif();
     }//GEN-LAST:event_btRefreshMouseClicked
+
+    private void btPengadaanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPengadaanActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btPengadaanActionPerformed
+
+    private void btStokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btStokActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btStokActionPerformed
+
+    private void btDataApproveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDataApproveActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btDataApproveActionPerformed
 
     public static void main(String args[]) {
         
@@ -376,11 +421,14 @@ public class HmAdmin extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btAbout;
+    private javax.swing.JButton btDataApprove;
     private javax.swing.JLabel btHelp;
     private javax.swing.JButton btLogout;
     private javax.swing.JButton btMKel;
     private javax.swing.JButton btMMas;
+    private javax.swing.JButton btPengadaan;
     private javax.swing.JLabel btRefresh;
+    private javax.swing.JButton btStok;
     private javax.swing.JButton btTambah;
     private javax.swing.JButton btTambahVendor;
     private javax.swing.JLabel jLabel1;
@@ -388,13 +436,10 @@ public class HmAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel jpNotif;
-    private javax.swing.JTable tbStock;
     private javax.swing.JLabel txJum;
     public javax.swing.JLabel txUser;
     // End of variables declaration//GEN-END:variables

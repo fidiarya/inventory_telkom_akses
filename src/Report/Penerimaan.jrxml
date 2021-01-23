@@ -33,14 +33,15 @@ WHERE penerimaan.`tgl_penerimaan` BETWEEN $P{tglA} AND $P{tglB}]]>
 	<title>
 		<band height="79" splitType="Stretch">
 			<image>
-				<reportElement uuid="aff908b5-5813-41c8-9fb9-5d5a6b82ddad" x="10" y="12" width="143" height="40"/>
+				<reportElement x="10" y="12" width="143" height="40" uuid="aff908b5-5813-41c8-9fb9-5d5a6b82ddad"/>
+				<imageExpression><![CDATA[$P{Logo}]]></imageExpression>
 			</image>
 		</band>
 	</title>
 	<pageHeader>
 		<band height="35" splitType="Stretch">
 			<staticText>
-				<reportElement uuid="0e00310e-d41e-443b-b39c-8716120f2cc9" x="153" y="0" width="182" height="20"/>
+				<reportElement x="153" y="0" width="182" height="20" uuid="0e00310e-d41e-443b-b39c-8716120f2cc9"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="12" isBold="true"/>
 				</textElement>
@@ -51,7 +52,7 @@ WHERE penerimaan.`tgl_penerimaan` BETWEEN $P{tglA} AND $P{tglB}]]>
 	<columnHeader>
 		<band height="28" splitType="Stretch">
 			<staticText>
-				<reportElement uuid="65a830a2-5a15-43dc-a132-e4a5506bb183" x="0" y="8" width="57" height="20"/>
+				<reportElement x="0" y="8" width="57" height="20" uuid="65a830a2-5a15-43dc-a132-e4a5506bb183"/>
 				<box leftPadding="4" rightPadding="4">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -65,7 +66,7 @@ WHERE penerimaan.`tgl_penerimaan` BETWEEN $P{tglA} AND $P{tglB}]]>
 				<text><![CDATA[id]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="2efb52a5-e473-44a0-ae04-4ff1c4ec9320" x="57" y="8" width="96" height="20"/>
+				<reportElement x="57" y="8" width="96" height="20" uuid="2efb52a5-e473-44a0-ae04-4ff1c4ec9320"/>
 				<box leftPadding="4" rightPadding="4">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -79,7 +80,7 @@ WHERE penerimaan.`tgl_penerimaan` BETWEEN $P{tglA} AND $P{tglB}]]>
 				<text><![CDATA[Tanggal]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="1764fa74-13fd-4419-999c-a52b4518443f" x="153" y="8" width="57" height="20"/>
+				<reportElement x="153" y="8" width="57" height="20" uuid="1764fa74-13fd-4419-999c-a52b4518443f"/>
 				<box leftPadding="4" rightPadding="4">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -93,7 +94,7 @@ WHERE penerimaan.`tgl_penerimaan` BETWEEN $P{tglA} AND $P{tglB}]]>
 				<text><![CDATA[id Material]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="e13ebe48-aa66-4554-b7f4-bdc85908ce70" x="210" y="8" width="117" height="20"/>
+				<reportElement x="210" y="8" width="117" height="20" uuid="e13ebe48-aa66-4554-b7f4-bdc85908ce70"/>
 				<box leftPadding="4" rightPadding="4">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -107,7 +108,7 @@ WHERE penerimaan.`tgl_penerimaan` BETWEEN $P{tglA} AND $P{tglB}]]>
 				<text><![CDATA[Nama Material]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="fddc4cad-3542-452e-bbc8-53d663823d0b" x="327" y="8" width="66" height="20"/>
+				<reportElement x="327" y="8" width="66" height="20" uuid="fddc4cad-3542-452e-bbc8-53d663823d0b"/>
 				<box leftPadding="4" rightPadding="4">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -121,7 +122,7 @@ WHERE penerimaan.`tgl_penerimaan` BETWEEN $P{tglA} AND $P{tglB}]]>
 				<text><![CDATA[id Vendor]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="265e7d43-b8cb-42c1-b9cc-62733a8b2aae" x="393" y="8" width="40" height="20"/>
+				<reportElement x="393" y="8" width="40" height="20" uuid="265e7d43-b8cb-42c1-b9cc-62733a8b2aae"/>
 				<box leftPadding="4" rightPadding="4">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -135,7 +136,7 @@ WHERE penerimaan.`tgl_penerimaan` BETWEEN $P{tglA} AND $P{tglB}]]>
 				<text><![CDATA[Qty]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="955edcd4-599c-4b59-9415-1a23f6b989a8" x="433" y="8" width="48" height="20"/>
+				<reportElement x="433" y="8" width="48" height="20" uuid="955edcd4-599c-4b59-9415-1a23f6b989a8"/>
 				<box leftPadding="4" rightPadding="4">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -153,7 +154,7 @@ WHERE penerimaan.`tgl_penerimaan` BETWEEN $P{tglA} AND $P{tglB}]]>
 	<detail>
 		<band height="20" splitType="Stretch">
 			<textField>
-				<reportElement uuid="12adfdc2-6d68-4134-a388-a6e6a9d6f27b" x="0" y="0" width="57" height="20"/>
+				<reportElement x="0" y="0" width="57" height="20" uuid="12adfdc2-6d68-4134-a388-a6e6a9d6f27b"/>
 				<box leftPadding="4" rightPadding="4">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -165,7 +166,7 @@ WHERE penerimaan.`tgl_penerimaan` BETWEEN $P{tglA} AND $P{tglB}]]>
 				<textFieldExpression><![CDATA[$F{penerimaan_id_penerimaan}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="2b168bf2-bce0-4cd0-8951-0bf0ecfdc8a8" x="57" y="0" width="96" height="20"/>
+				<reportElement x="57" y="0" width="96" height="20" uuid="2b168bf2-bce0-4cd0-8951-0bf0ecfdc8a8"/>
 				<box leftPadding="4" rightPadding="4">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -177,7 +178,7 @@ WHERE penerimaan.`tgl_penerimaan` BETWEEN $P{tglA} AND $P{tglB}]]>
 				<textFieldExpression><![CDATA[$F{penerimaan_tgl_penerimaan}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="cc429e72-8a5e-4910-8630-3ca97001d69f" x="153" y="0" width="57" height="20"/>
+				<reportElement x="153" y="0" width="57" height="20" uuid="cc429e72-8a5e-4910-8630-3ca97001d69f"/>
 				<box leftPadding="4" rightPadding="4">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -189,7 +190,7 @@ WHERE penerimaan.`tgl_penerimaan` BETWEEN $P{tglA} AND $P{tglB}]]>
 				<textFieldExpression><![CDATA[$F{penerimaan_id_material}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="70f12a52-1960-48bb-9a98-329638dda219" x="210" y="0" width="117" height="20"/>
+				<reportElement x="210" y="0" width="117" height="20" uuid="70f12a52-1960-48bb-9a98-329638dda219"/>
 				<box leftPadding="4" rightPadding="4">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -201,7 +202,7 @@ WHERE penerimaan.`tgl_penerimaan` BETWEEN $P{tglA} AND $P{tglB}]]>
 				<textFieldExpression><![CDATA[$F{penerimaan_nm_material}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="93212af7-4a8c-4062-9817-d209c08d5951" x="327" y="0" width="66" height="20"/>
+				<reportElement x="327" y="0" width="66" height="20" uuid="93212af7-4a8c-4062-9817-d209c08d5951"/>
 				<box leftPadding="4" rightPadding="4">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -213,7 +214,7 @@ WHERE penerimaan.`tgl_penerimaan` BETWEEN $P{tglA} AND $P{tglB}]]>
 				<textFieldExpression><![CDATA[$F{penerimaan_id_vendor}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="5d277b4d-fb1a-43a5-81b7-6e9f034cc7a6" x="393" y="0" width="40" height="20"/>
+				<reportElement x="393" y="0" width="40" height="20" uuid="5d277b4d-fb1a-43a5-81b7-6e9f034cc7a6"/>
 				<box leftPadding="4" rightPadding="4">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -225,7 +226,7 @@ WHERE penerimaan.`tgl_penerimaan` BETWEEN $P{tglA} AND $P{tglB}]]>
 				<textFieldExpression><![CDATA[$F{penerimaan_qty}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="e1f9e861-d3f4-4fdd-ab64-7fdfc0d1c7fc" x="433" y="0" width="48" height="20"/>
+				<reportElement x="433" y="0" width="48" height="20" uuid="e1f9e861-d3f4-4fdd-ab64-7fdfc0d1c7fc"/>
 				<box leftPadding="4" rightPadding="4">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -241,7 +242,7 @@ WHERE penerimaan.`tgl_penerimaan` BETWEEN $P{tglA} AND $P{tglB}]]>
 	<pageFooter>
 		<band height="41" splitType="Stretch">
 			<textField>
-				<reportElement uuid="8f138bc7-2c9c-4d1b-8b3f-ee321ebe07d0" x="451" y="10" width="30" height="20"/>
+				<reportElement x="451" y="10" width="30" height="20" uuid="8f138bc7-2c9c-4d1b-8b3f-ee321ebe07d0"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
@@ -250,22 +251,20 @@ WHERE penerimaan.`tgl_penerimaan` BETWEEN $P{tglA} AND $P{tglB}]]>
 	<summary>
 		<band height="128" splitType="Stretch">
 			<staticText>
-				<reportElement uuid="d70935d3-5aed-46d3-be50-78afc1898dcd" x="314" y="15" width="42" height="20"/>
-				<textElement/>
+				<reportElement x="314" y="15" width="42" height="20" uuid="d70935d3-5aed-46d3-be50-78afc1898dcd"/>
 				<text><![CDATA[Cibitung,]]></text>
 			</staticText>
 			<textField pattern="EEEEE dd MMMMM yyyy">
-				<reportElement uuid="2b6061ed-a174-411c-ab6d-6b69b59d57ce" x="356" y="15" width="125" height="20"/>
-				<textElement/>
+				<reportElement x="356" y="15" width="125" height="20" uuid="2b6061ed-a174-411c-ab6d-6b69b59d57ce"/>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement uuid="12fa36e1-9de6-4a4f-a269-b660f5dc08c7" x="327" y="35" width="100" height="20"/>
+				<reportElement x="327" y="35" width="100" height="20" uuid="12fa36e1-9de6-4a4f-a269-b660f5dc08c7"/>
 				<textElement textAlignment="Center"/>
 				<text><![CDATA[Admin]]></text>
 			</staticText>
 			<textField>
-				<reportElement uuid="58ac39cc-411b-4dc6-8c16-3384f191a76e" x="327" y="96" width="100" height="20"/>
+				<reportElement x="327" y="96" width="100" height="20" uuid="58ac39cc-411b-4dc6-8c16-3384f191a76e"/>
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$P{txUser}]]></textFieldExpression>
 			</textField>

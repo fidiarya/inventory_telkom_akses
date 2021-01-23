@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 16 Des 2020 pada 14.29
--- Versi Server: 10.1.25-MariaDB
+-- Generation Time: Dec 26, 2020 at 03:17 AM
+-- Server version: 10.1.25-MariaDB
 -- PHP Version: 5.6.31
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -25,7 +25,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `pemakaian`
+-- Table structure for table `pemakaian`
 --
 
 CREATE TABLE `pemakaian` (
@@ -42,26 +42,30 @@ CREATE TABLE `pemakaian` (
   `alamat` text NOT NULL,
   `qty` varchar(10) NOT NULL,
   `satuan` varchar(10) NOT NULL,
-  `nm_teknisi` varchar(50) NOT NULL
+  `nm_teknisi` varchar(50) NOT NULL,
+  `status` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `pemakaian`
+-- Dumping data for table `pemakaian`
 --
 
-INSERT INTO `pemakaian` (`id_pemakaian`, `id_pengeluaran`, `tgl_pemakaian`, `no_gangguan`, `keluhan`, `tindakan`, `id_material`, `nm_material`, `id_pelanggan`, `nm_pelanggan`, `alamat`, `qty`, `satuan`, `nm_teknisi`) VALUES
-('PEM0001', 'OUT0001', '04 Desember 2020', '111111', 'WWWWWWWWW', 'SSSSSSSSSS', 'OD180001', 'ODP-Solid-8-LKP', '2222222', 'AAAAAAAAAAAAA', 'WWWWWWWWWW', '12', 'pcs', 'Robert'),
-('PEM0002', 'OUT0002', '05 Desember 2020', '111112', 'SSSSSSSS', 'DDDDDDDDDD', 'OD180001', 'ODP-Solid-8-LKP', '2222223', 'QQEQ', 'DDDDDDD', '12', 'pcs', 'Robert'),
-('PEM0003', 'OUT0003', '06 Desember 2020', '11234', 'AAAAAAAA', 'DDDDDDDD', 'OD180001', 'ODP-Solid-8-LKP', '13425', 'SSSSSSSFG', 'EETTTTTTTTTTTTU', '12', 'pcs', 'Robert'),
-('PEM0004', 'OUT0007', '10 Desember 2020', '1231234', 'Pecah', 'Ganti Baru', 'CV0001', 'Converter FO', '12345678', 'Susi', 'Pesona Gading', '50', 'pcs', 'Herman'),
-('PEM0005', 'OUT0008', '13 Desember 2020', '1234', 'kabel putus', 'ganti baru', 'CV0001', 'Converter FO', '1234124', 'adfafdfff', 'cibitung', '5', 'pcs', 'paijo'),
-('PEM0006', 'OUT0009', '15 Desember 2020', 'IN2009876', 'INTERNET LOS', 'GANTI KABEL', 'AC-OF-SM-1B', 'KABEL OPTIK', '122861234567', 'SITI', 'METLAND TAMBUN', '200', 'pcs', 'AGUS'),
-('PEM0007', 'OUT0009', '30 Desember 2020', 'IN6554389', 'INTERNET MATI', 'GANTI KABEL', 'AC-OF-SM-1B', 'KABEL OPTIK', '122861009889', 'PT DENSO TBK', 'KAWASAN MM 2100', '800', 'pcs', 'AGUS');
+INSERT INTO `pemakaian` (`id_pemakaian`, `id_pengeluaran`, `tgl_pemakaian`, `no_gangguan`, `keluhan`, `tindakan`, `id_material`, `nm_material`, `id_pelanggan`, `nm_pelanggan`, `alamat`, `qty`, `satuan`, `nm_teknisi`, `status`) VALUES
+('PEM0001', 'OUT0001', '04 Desember 2020', '111111', 'WWWWWWWWW', 'SSSSSSSSSS', 'OD180001', 'ODP-Solid-8-LKP', '2222222', 'AAAAAAAAAAAAA', 'WWWWWWWWWW', '10', 'pcs', 'Robert', ''),
+('PEM0002', 'OUT0002', '05 Desember 2020', '111112', 'SSSSSSSS', 'DDDDDDDDDD', 'OD180001', 'ODP-Solid-8-LKP', '2222223', 'QQEQ', 'DDDDDDD', '12', 'pcs', 'Robert', 'pakai'),
+('PEM0003', 'OUT0003', '06 Desember 2020', '11234', 'AAAAAAAA', 'DDDDDDDD', 'OD180001', 'ODP-Solid-8-LKP', '13425', 'SSSSSSSFG', 'EETTTTTTTTTTTTU', '12', 'pcs', 'Robert', 'Rekon'),
+('PEM0004', 'OUT0007', '10 Desember 2020', '1231234', 'Pecah', 'Ganti Baru', 'CV0001', 'Converter FO', '12345678', 'Susi', 'Pesona Gading', '50', 'pcs', 'Herman', 'Rekon'),
+('PEM0005', 'OUT0008', '13 Desember 2020', '1234', 'kabel putus', 'ganti baru', 'CV0001', 'Converter FO', '1234124', 'adfafdfff', 'cibitung', '5', 'pcs', 'paijo', 'Rekon'),
+('PEM0006', 'OUT0009', '15 Desember 2020', 'IN2009876', 'INTERNET LOS', 'GANTI KABEL', 'AC-OF-SM-1B', 'KABEL OPTIK', '122861234567', 'SITI', 'METLAND TAMBUN', '200', 'pcs', 'AGUS', 'Tidak Rekon'),
+('PEM0007', 'OUT0009', '30 Desember 2020', 'IN6554389', 'INTERNET MATI', 'GANTI KABEL', 'AC-OF-SM-1B', 'KABEL OPTIK', '122861009889', 'PT DENSO TBK', 'KAWASAN MM 2100', '800', 'pcs', 'AGUS', 'Rekon'),
+('PEM0008', 'OUT0009', '24 Desember 2020', '1234', 'rusak', 'ganti baru', 'AC-OF-SM-1B', 'KABEL OPTIK', '123123', 'gogon', 'bekasi', '1000', 'pcs', 'AGUS', 'Rekon'),
+('PEM0009', 'OUT0004', '23 Desember 2020', '123', 'putus', 'sambung', 'www123', 'wolding-wow', '123123', 'bayu', 'cibitung', '100', 'pcs', 'Dudin', 'Tidak Rekon'),
+('PEM0010', 'OUT0010', '27 Desember 2020', '14414', 'Kabel putus', 'Gnati Kabel', 'AC-OF-SM-1B', 'KABEL OPTIK', '123', 'tutik', 'bekasi', '100', 'meter', 'aji', 'Rekon');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `penerimaan`
+-- Table structure for table `penerimaan`
 --
 
 CREATE TABLE `penerimaan` (
@@ -75,7 +79,7 @@ CREATE TABLE `penerimaan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `penerimaan`
+-- Dumping data for table `penerimaan`
 --
 
 INSERT INTO `penerimaan` (`id_penerimaan`, `tgl_penerimaan`, `id_material`, `nm_material`, `id_vendor`, `qty`, `satuan`) VALUES
@@ -87,7 +91,7 @@ INSERT INTO `penerimaan` (`id_penerimaan`, `tgl_penerimaan`, `id_material`, `nm_
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `pengeluaran`
+-- Table structure for table `pengeluaran`
 --
 
 CREATE TABLE `pengeluaran` (
@@ -103,7 +107,7 @@ CREATE TABLE `pengeluaran` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `pengeluaran`
+-- Dumping data for table `pengeluaran`
 --
 
 INSERT INTO `pengeluaran` (`id_pengeluaran`, `tgl_pengeluaran`, `id_permintaan`, `id_material`, `nm_material`, `qty`, `satuan`, `nm_teknisi`, `nm_admin`) VALUES
@@ -115,12 +119,13 @@ INSERT INTO `pengeluaran` (`id_pengeluaran`, `tgl_pengeluaran`, `id_permintaan`,
 ('OUT0006', '04 Desember 2020', 'PER0004', 'OD180001', 'ODP-Solid-8-LKP', '13', 'pcs', 'Abdul', 'Ilham Muharif'),
 ('OUT0007', '09 Desember 2020', 'PER0005', 'CV0001', 'Converter FO', '50', 'pcs', 'Herman', 'Ilham Muharif'),
 ('OUT0008', '13 Desember 2020', 'PER0006', 'CV0001', 'Converter FO', '5', 'pcs', 'paijo', 'Ilham Muharif'),
-('OUT0009', '13 Desember 2020', 'PER0007', 'AC-OF-SM-1B', 'KABEL OPTIK', '1000', 'pcs', 'AGUS', 'Ilham Muharif');
+('OUT0009', '13 Desember 2020', 'PER0007', 'AC-OF-SM-1B', 'KABEL OPTIK', '1000', 'pcs', 'AGUS', 'Ilham Muharif'),
+('OUT0010', '26 Desember 2020', 'PER0008', 'AC-OF-SM-1B', 'KABEL OPTIK', '100', 'meter', 'aji', 'Ilham Muharif');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `permintaan`
+-- Table structure for table `permintaan`
 --
 
 CREATE TABLE `permintaan` (
@@ -136,7 +141,7 @@ CREATE TABLE `permintaan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `permintaan`
+-- Dumping data for table `permintaan`
 --
 
 INSERT INTO `permintaan` (`id_permintaan`, `tgl_permintaan`, `id_material`, `nm_material`, `qty`, `satuan`, `nm_teknisi`, `nm_leader`, `status`) VALUES
@@ -146,12 +151,13 @@ INSERT INTO `permintaan` (`id_permintaan`, `tgl_permintaan`, `id_material`, `nm_
 ('PER0004', '04 Desember 2020', 'OD180001', 'ODP-Solid-8-LKP', '13', 'pcs', 'Abdul', 'Sutoro Waluyo', 'Keluar'),
 ('PER0005', '09 Desember 2020', 'CV0001', 'Converter FO', '50', 'pcs', 'Herman', 'Sutoro Waluyo', 'Keluar'),
 ('PER0006', '13 Desember 2020', 'CV0001', 'Converter FO', '5', 'pcs', 'paijo', 'Sutoro Waluyo', 'Keluar'),
-('PER0007', '13 Desember 2020', 'AC-OF-SM-1B', 'KABEL OPTIK', '1000', 'pcs', 'AGUS', 'Sutoro Waluyo', 'Keluar');
+('PER0007', '13 Desember 2020', 'AC-OF-SM-1B', 'KABEL OPTIK', '1000', 'pcs', 'AGUS', 'Sutoro Waluyo', 'Keluar'),
+('PER0008', '26 Desember 2020', 'AC-OF-SM-1B', 'KABEL OPTIK', '100', 'meter', 'aji', 'Sutoro Waluyo', 'Keluar');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `rekon`
+-- Table structure for table `rekon`
 --
 
 CREATE TABLE `rekon` (
@@ -168,22 +174,19 @@ CREATE TABLE `rekon` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `rekon`
+-- Dumping data for table `rekon`
 --
 
 INSERT INTO `rekon` (`id_pakai`, `id_material`, `nm_material`, `qty_pakai`, `sat_pakai`, `id_keluar`, `qty_keluar`, `sat_keluar`, `tgl_rekon`, `status`) VALUES
-('PEM0001', 'OD180001', 'ODP-Solid-8-LKP', '12', 'pcs', 'OUT0001', '12', 'pcs', '10 Desember 2020 ', 'Rekon'),
-('PEM0002', 'OD180001', 'ODP-Solid-8-LKP', '12', 'pcs', 'OUT0002', '12', 'pcs', '09 Desember 2020 ', 'Rekon'),
-('PEM0003', 'OD180001', 'ODP-Solid-8-LKP', '12', 'pcs', 'OUT0003', '12', 'pcs', '08 Desember 2020', 'Rekon'),
-('PEM0004', 'CV0001', 'Converter FO', '50', 'pcs', 'OUT0007', '50', 'pcs', '09 Desember 2020', 'Rekon'),
-('PEM0005', 'CV0001', 'Converter FO', '5', 'pcs', 'OUT0008', '5', 'pcs', '12 Desember 2020', 'Rekon'),
-('PEM0006', 'AC-OF-SM-1B', 'KABEL OPTIK', '200', 'pcs', 'OUT0009', '1000', 'pcs', '12 Desember 2020', 'Tidak Rekon'),
-('PEM0007', 'AC-OF-SM-1B', 'KABEL OPTIK', '800', 'pcs', 'OUT0009', '1000', 'pcs', '12 Desember 2020', 'Tidak Rekon');
+('PEM0003', 'OD180001', 'ODP-Solid-8-LKP', '12', 'pcs', 'OUT0003', '12', 'pcs', '23 Desember 2020', 'Rekon'),
+('PEM0004', 'CV0001', 'Converter FO', '50', 'pcs', 'OUT0007', '50', 'pcs', '26 Desember 2020', 'Rekon'),
+('PEM0005', 'CV0001', 'Converter FO', '5', 'pcs', 'OUT0008', '5', 'pcs', '26 Desember 2020', 'Rekon'),
+('PEM0010', 'AC-OF-SM-1B', 'KABEL OPTIK', '100', 'meter', 'OUT0010', '100', 'meter', '26 Desember 2020', 'Rekon');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_material`
+-- Table structure for table `tb_material`
 --
 
 CREATE TABLE `tb_material` (
@@ -195,11 +198,11 @@ CREATE TABLE `tb_material` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tb_material`
+-- Dumping data for table `tb_material`
 --
 
 INSERT INTO `tb_material` (`id_material`, `nm_material`, `id_vendor`, `qty`, `satuan`) VALUES
-('AC-OF-SM-1B', 'KABEL OPTIK', 'PTSAJ', '29000', 'pcs'),
+('AC-OF-SM-1B', 'KABEL OPTIK', 'PTSAJ', '28900', 'pcs'),
 ('CV0001', 'Converter FO', 'HW0001', '95', 'pcs'),
 ('FB0001', 'Fiber Optic', 'HW0001', '100', 'pcs'),
 ('OD180001', 'ODP-Solid-8-LKP', 'HW0001', '255', 'pcs');
@@ -207,7 +210,7 @@ INSERT INTO `tb_material` (`id_material`, `nm_material`, `id_vendor`, `qty`, `sa
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_user`
+-- Table structure for table `tb_user`
 --
 
 CREATE TABLE `tb_user` (
@@ -218,7 +221,7 @@ CREATE TABLE `tb_user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tb_user`
+-- Dumping data for table `tb_user`
 --
 
 INSERT INTO `tb_user` (`username`, `password`, `nama`, `level`) VALUES
@@ -230,7 +233,7 @@ INSERT INTO `tb_user` (`username`, `password`, `nama`, `level`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_vendor`
+-- Table structure for table `tb_vendor`
 --
 
 CREATE TABLE `tb_vendor` (
@@ -241,7 +244,7 @@ CREATE TABLE `tb_vendor` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tb_vendor`
+-- Dumping data for table `tb_vendor`
 --
 
 INSERT INTO `tb_vendor` (`id_vendor`, `nm_vendor`, `alamat`, `no_telp`) VALUES
